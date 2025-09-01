@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول - فروزن ماركت</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+     :root {
+      --primary-blue: #183c6e;
+      --primary-yellow: #ffff00;
+      --light-gray: #f8f9fa;
+      --text-dark: #333;
+      --primary-color: #3a6cf4;
+      --secondary-color: #ff9d3c;
+      --accent-color: #ff5e7d;
+      --text-color: #2c3e50;
+      --light-bg: #f8f9fa;
+      --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+      --hover-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      --border-radius: 16px;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body { 
+      font-family: "Tajawal", "Segoe UI", sans-serif; 
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-yellow) 100%); 
+      min-height: 100vh; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      margin: 0; 
+      padding: 15px;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+    
+    .auth-container { 
+      width: 100%; 
+      max-width: 500px; 
+      padding: 40px 30px; 
+      border-radius: var(--border-radius); 
+      background: rgba(255, 255, 255, 0.15); 
+      backdrop-filter: blur(12px); 
+      box-shadow: var(--card-shadow); 
+      color: #fff; 
+      animation: fadeIn 0.8s ease-in-out;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    @keyframes fadeIn { 
+      from {opacity: 0; transform: translateY(30px);} 
+      to {opacity: 1; transform: translateY(0);} 
+    }
+    
+    .auth-header { 
+      text-align: center; 
+      margin-bottom: 25px;
+    }
+    
+    .auth-header h3 { 
+      font-weight: 800; 
+      font-size: 1.8rem; 
+      color: #fff; 
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .auth-header p { 
+      opacity: 0.9; 
+      font-size: 0.95rem; 
+      margin-top: 10px;
+    }
+    
+    .form-control, .form-select { 
+      border-radius: 12px; 
+      padding: 12px 40px 12px 12px; 
+      border: 2px solid rgba(255,255,255,0.3); 
+      background: rgba(255,255,255,0.2); 
+      color: #fff; 
+      transition: var(--transition);
+    }
+    
+    .form-control:focus, .form-select:focus {
+      border-color: var(--primary-yellow);
+      box-shadow: 0 0 0 0.2rem rgba(255, 255, 0, 0.25);
+      background: rgba(255,255,255,0.25);
+    }
+    
+    .form-control::placeholder, .form-select::placeholder { 
+      color: rgba(255,255,255,0.8); 
+    }
+    
+    .form-select option {
+      background: var(--primary-blue);
+      color: #fff;
+    }
+    
+    .input-icon { 
+      position: absolute; 
+      top: 50%; 
+      right: 12px; 
+      transform: translateY(-50%); 
+      color: var(--primary-yellow); 
+      font-size: 1rem; 
+      z-index: 5;
+    }
+    
+    .input-group { 
+      position: relative; 
+      margin-bottom: 18px; 
+    }
+    
+    .btn-primary-custom { 
+      background: var(--primary-yellow); 
+      color: var(--primary-blue); 
+      border: none; 
+      border-radius: 12px; 
+      padding: 12px; 
+      font-weight: 700; 
+      font-size: 1rem; 
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(255, 255, 0, 0.3);
+    }
+    
+    .btn-primary-custom:hover { 
+      background: #e6e600; 
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 255, 0, 0.4);
+    }
+    
+    .btn-primary-custom:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .social-login { 
+      display: flex; 
+      gap: 15px; 
+      margin-top: 20px; 
+      flex-wrap: wrap; 
+    }
+    
+    .social-login button { 
+      flex: 1; 
+      border-radius: 12px; 
+      padding: 10px; 
+      border: none; 
+      color: #fff; 
+      font-weight: 600; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 8px; 
+      transition: var(--transition); 
+      cursor:pointer;
+    }
+    
+    .btn-google {background: #db4437;} 
+    .btn-google:hover {background: #e95b4c; transform: translateY(-2px);}
+    
+    .btn-facebook {background: #1877f2;} 
+    .btn-facebook:hover {background: #3b89f8; transform: translateY(-2px);}
+    
+    .auth-footer { 
+      text-align: center; 
+      margin-top: 20px; 
+      font-size: 0.9rem; 
+    }
+    
+    .auth-footer a { 
+      color: var(--primary-yellow); 
+      font-weight: 600; 
+      text-decoration: none; 
+      transition: var(--transition);
+    }
+    
+    .auth-footer a:hover { 
+      text-decoration: underline; 
+      color: #e6e600;
+    }
+    
+    .nav-tabs { 
+      border: none; 
+      justify-content: center; 
+      margin-bottom: 25px; 
+    }
+    
+    .nav-tabs .nav-link { 
+      border: none; 
+      background: transparent; 
+      color: rgba(255,255,255,0.7); 
+      font-weight: 600; 
+      transition: var(--transition); 
+      padding: 10px 20px;
+    }
+    
+    .nav-tabs .nav-link:hover {
+      color: var(--primary-yellow);
+    }
+    
+    .nav-tabs .nav-link.active { 
+      color: var(--primary-yellow); 
+      border-bottom: 2px solid var(--primary-yellow); 
+      background: transparent;
+    }
+    
+    #regMsg, #loginMsg {
+      text-align: center;
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      transition: var(--transition);
+      min-height: 20px;
+    }
+    
+    .msg-success {
+      color: var(--primary-yellow);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+    
+    .msg-error {
+      color: #ff6b6b;
+      border: 1px solid rgba(255, 107, 107, 0.3);
+    }
+
+    .loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--primary-blue);
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s ease-in-out infinite;
+      margin-left: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .logout-notice {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-size: 14px;
+      z-index: 1000;
+      animation: slideIn 0.3s ease-out;
+      box-shadow: var(--card-shadow);
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    .form-check-input {
+      background-color: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    
+    .form-check-input:checked {
+      background-color: var(--primary-yellow);
+      border-color: var(--primary-yellow);
+    }
+    
+    .form-check-label {
+      color: rgba(255,255,255,0.9);
+    }
+
+    @media (max-width: 576px) {
+      .auth-container { 
+        padding: 25px 20px; 
+        border-radius: 15px; 
+      }
+      
+      .auth-header h3 { 
+        font-size: 1.5rem; 
+      }
+      
+      .auth-header p { 
+        font-size: 0.85rem; 
+      }
+      
+      .form-control, .form-select { 
+        font-size: 0.9rem; 
+        padding: 10px 35px 10px 10px; 
+      }
+      
+      .btn-primary-custom { 
+        font-size: 0.9rem; 
+        padding: 10px; 
+      }
+      
+      .social-login { 
+        flex-direction: column; 
+      }
+      
+      .social-login button { 
+        width: 100%; 
+      }
+      
+      .nav-tabs .nav-link {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+  </style>
+</head>
+<body>
+
+<div class="auth-container">
+  <div class="auth-header">
+    <h3>فروزن ماركت</h3>
+    <p>مرحباً بك! من فضلك قم بتسجيل الدخول أو أنشئ حساب جديد</p>
+  </div>
+
+  <!-- Tabs -->
+  <ul class="nav nav-tabs" id="authTabs" role="tablist">
+    <li class="nav-item"><button class="nav-link active" id="signin-tab" data-bs-toggle="tab" data-bs-target="#signin">تسجيل الدخول</button></li>
+    <li class="nav-item"><button class="nav-link" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup">إنشاء حساب</button></li>
+  </ul>
+
+  <!-- Forms -->
+  <div class="tab-content">
+    <!-- Sign In -->
+    <div class="tab-pane fade show active" id="signin">
+      <form id="signin-form">
+        <div class="input-group">
+          <i class="fa fa-envelope input-icon"></i>
+          <input type="email" class="form-control" placeholder="البريد الإلكتروني" required>
+        </div>
+        <div class="input-group">
+          <i class="fa fa-lock input-icon"></i>
+          <input type="password" class="form-control" placeholder="كلمة المرور" required>
+        </div>
+        <div class="d-flex justify-content-between mb-3">
+          <div>
+            <input type="checkbox" id="remember"> <label for="remember">تذكرني</label>
+          </div>
+          <a href="#" id="forgot-password" class="text-warning">نسيت كلمة المرور؟</a>
+        </div>
+        <button type="submit" class="btn btn-primary-custom w-100" id="loginBtn">
+          تسجيل الدخول
+        </button>
+        <div id="loginMsg" class="mt-3"></div>
+      </form>
+    </div>
+
+    <!-- Sign Up -->
+    <div class="tab-pane fade" id="signup">
+      <form id="registerForm">
+        <div class="input-group">
+          <i class="fa fa-user input-icon"></i>
+          <input id="regName" type="text" class="form-control" placeholder="الاسم الكامل" required>
+        </div>
+        <div class="input-group">
+          <i class="fa fa-envelope input-icon"></i>
+          <input id="regEmail" type="email" class="form-control" placeholder="البريد الإلكتروني" required>
+        </div>
+        <div class="input-group">
+          <i class="fa fa-lock input-icon"></i>
+          <input id="regPassword" type="password" class="form-control" placeholder="كلمة المرور" required>
+        </div>
+        <div class="input-group">
+          <i class="fa fa-phone input-icon"></i>
+          <input id="regPhone" type="tel" class="form-control" placeholder="رقم الهاتف">
+        </div>
+        <button type="submit" class="btn btn-primary-custom w-100" id="registerBtn">
+          إنشاء حساب
+        </button>
+        <div id="regMsg" class="mt-3"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Social Login -->
+  <div class="social-login">
+    <button class="btn-google"><i class="fab fa-google"></i> Google</button>
+    <button class="btn-facebook"><i class="fab fa-facebook-f"></i> Facebook</button>
+  </div>
+
+  <!-- Footer -->
+  <div class="auth-footer">
+    <p>ليس لديك حساب؟ <a href="#" onclick="document.getElementById('signup-tab').click()">سجل الآن</a></p>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+  import { 
+    getAuth, 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword, 
+    GoogleAuthProvider, 
+    FacebookAuthProvider, 
+    signInWithPopup, 
+    sendPasswordResetEmail,
+    updateProfile,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCFk_WlW4qHcSbsLSHeWUTfGsc5W0FSE8A",
+    authDomain: "frozenmarket-5c9df.firebaseapp.com",
+    projectId: "frozenmarket-5c9df",
+    storageBucket: "frozenmarket-5c9df.firebasestorage.app",
+    messagingSenderId: "847658049541",
+    appId: "1:847658049541:web:6f4cd551a12d5e45b5bc6c",
+    measurementId: "G-32ZC3B3KPT"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // متغيرات للتحكم في التدفق
+  let isProcessingAuth = false;
+
+  // التحقق من وجود رسالة تسجيل خروج
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('logout') === 'true') {
+    showLogoutNotice();
+    // إزالة المعامل من URL
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+
+  // دالة عرض إشعار تسجيل الخروج
+  function showLogoutNotice() {
+    const notice = document.createElement('div');
+    notice.className = 'logout-notice';
+    notice.textContent = 'تم تسجيل الخروج بنجاح';
+    document.body.appendChild(notice);
+    
+    setTimeout(() => {
+      notice.remove();
+    }, 3000);
+  }
+
+  // دالة لعرض الرسائل
+  function showMessage(elementId, message, type = 'success') {
+    const msgElement = document.getElementById(elementId);
+    msgElement.textContent = message;
+    msgElement.className = type === 'success' ? 'msg-success' : 'msg-error';
+    
+    setTimeout(() => {
+      msgElement.textContent = '';
+      msgElement.className = '';
+    }, 5000);
+  }
+
+  // دالة التحميل
+  function setLoading(buttonId, isLoading) {
+    const button = document.getElementById(buttonId);
+    if (isLoading) {
+      button.disabled = true;
+      button.innerHTML = button.textContent + '<span class="spinner"></span>';
+    } else {
+      button.disabled = false;
+      button.innerHTML = button.textContent.replace('<span class="spinner"></span>', '');
+    }
+  }
+
+  // دالة الانتقال الآمن للبروفايل
+  function redirectToProfile() {
+    // وضع علامة أن هناك عملية تسجيل دخول جارية
+    sessionStorage.setItem('justLoggedIn', 'true');
+    window.location.href = "ProfilePage.html";
+  }
+
+  // --- Sign Up ---
+  document.getElementById("registerForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (isProcessingAuth) return;
+    
+    isProcessingAuth = true;
+    setLoading('registerBtn', true);
+    
+    const name = document.getElementById("regName").value.trim();
+    const email = document.getElementById("regEmail").value.trim();
+    const password = document.getElementById("regPassword").value;
+    const phone = document.getElementById("regPhone").value.trim();
+    
+    if (!name || !email || !password) {
+      showMessage('regMsg', 'يرجى ملء جميع الحقول المطلوبة', 'error');
+      isProcessingAuth = false;
+      setLoading('registerBtn', false);
+      return;
+    }
+    
+    try {
+      // إنشاء المستخدم في Authentication
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      
+      // تحديث الملف الشخصي مع الاسم
+      await updateProfile(user, {
+        displayName: name
+      });
+      
+     await setDoc(doc(db, "users", user.uid), {
+  uid: user.uid,
+  name: name,
+  email: user.email,
+  phone: phone || "",
+  role: "user", // 👈 مهم
+  registerDate: new Date().toLocaleDateString('ar-EG'),
+  createdAt: new Date(),
+  stats: {
+    ordersCount: 0,
+    totalSpent: 0,
+    lastOrderAt: null
+  },
+  addresses: {
+    primary: "",
+    secondary: ""
+  },
+  preferences: {
+    deliveryTime: "أي وقت",
+    notifications: {
+      email: true,
+      sms: true,
+      promotional: false,
+      orderStatus: true
+    }
+  }
+}, { merge: true });
+
+      
+      showMessage('regMsg', 'تم إنشاء الحساب بنجاح! جاري التحويل...', 'success');
+      
+      setTimeout(() => {
+        redirectToProfile();
+      }, 1500);
+      
+    } catch (err) {
+      let errorMessage = "حدث خطأ أثناء إنشاء الحساب";
+      
+      if (err.code === 'auth/email-already-in-use') {
+        errorMessage = "هذا البريد الإلكتروني مُستخدم بالفعل";
+      } else if (err.code === 'auth/weak-password') {
+        errorMessage = "كلمة المرور ضعيفة جداً (6 أحرف على الأقل)";
+      } else if (err.code === 'auth/invalid-email') {
+        errorMessage = "البريد الإلكتروني غير صحيح";
+      }
+      
+      showMessage('regMsg', errorMessage, 'error');
+      isProcessingAuth = false;
+      setLoading('registerBtn', false);
+    }
+  });
+
+  // --- Sign In ---
+  document.getElementById("signin-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (isProcessingAuth) return;
+    
+    isProcessingAuth = true;
+    setLoading('loginBtn', true);
+    
+    const email = e.target.querySelector('input[type="email"]').value.trim();
+    const password = e.target.querySelector('input[type="password"]').value;
+    
+    if (!email || !password) {
+      showMessage('loginMsg', 'يرجى ملء جميع الحقول', 'error');
+      isProcessingAuth = false;
+      setLoading('loginBtn', false);
+      return;
+    }
+    
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      showMessage('loginMsg', 'تم تسجيل الدخول بنجاح! جاري التحويل...', 'success');
+      
+      setTimeout(() => {
+        redirectToProfile();
+      }, 1000);
+      
+    } catch (err) {
+      let errorMessage = "خطأ في البريد الإلكتروني أو كلمة المرور";
+      
+      if (err.code === 'auth/user-not-found') {
+        errorMessage = "لا يوجد حساب بهذا البريد الإلكتروني";
+      } else if (err.code === 'auth/wrong-password') {
+        errorMessage = "كلمة المرور غير صحيحة";
+      } else if (err.code === 'auth/invalid-email') {
+        errorMessage = "البريد الإلكتروني غير صحيح";
+      } else if (err.code === 'auth/too-many-requests') {
+        errorMessage = "محاولات كثيرة جداً، حاول مرة أخرى لاحقاً";
+      } else if (err.code === 'auth/user-disabled') {
+        errorMessage = "هذا الحساب معطل";
+      }
+      
+      showMessage('loginMsg', errorMessage, 'error');
+      isProcessingAuth = false;
+      setLoading('loginBtn', false);
+    }
+  });
+
+  // --- Google Login ---
+  document.querySelector(".btn-google").addEventListener("click", async () => {
+    if (isProcessingAuth) return;
+    
+    isProcessingAuth = true;
+    const provider = new GoogleAuthProvider();
+    
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      
+      // حفظ أو تحديث بيانات المستخدم في Firestore
+     await setDoc(doc(db, "users", user.uid), {
+  uid: user.uid,
+  name: user.displayName || "مستخدم Google",
+  email: user.email,
+  phone: user.phoneNumber || "",
+  photoURL: user.photoURL,
+  role: "user", // 👈 نفس الشيء هنا
+  registerDate: new Date().toLocaleDateString('ar-EG'),
+  createdAt: new Date(),
+  loginMethod: "google",
+  stats: {
+    ordersCount: 0,
+    totalSpent: 0,
+    lastOrderAt: null
+  },
+  addresses: {
+    primary: "",
+    secondary: ""
+  },
+  preferences: {
+    deliveryTime: "أي وقت",
+    notifications: {
+      email: true,
+      sms: false,
+      promotional: false,
+      orderStatus: true
+    }
+  }
+}, { merge: true });
+
+      
+      redirectToProfile();
+    } catch (err) {
+      console.error("Google login error:", err);
+      showMessage('loginMsg', 'فشل في تسجيل الدخول بـ Google', 'error');
+      isProcessingAuth = false;
+    }
+  });
+
+  // --- Facebook Login ---
+  document.querySelector(".btn-facebook").addEventListener("click", async () => {
+    if (isProcessingAuth) return;
+    
+    isProcessingAuth = true;
+    const provider = new FacebookAuthProvider();
+    
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      
+      // حفظ أو تحديث بيانات المستخدم في Firestore
+     await setDoc(doc(db, "users", user.uid), {
+  uid: user.uid,
+  name: user.displayName || "مستخدم Google",
+  email: user.email,
+  phone: user.phoneNumber || "",
+  photoURL: user.photoURL,
+  role: "user", // 👈 نفس الشيء هنا
+  registerDate: new Date().toLocaleDateString('ar-EG'),
+  createdAt: new Date(),
+  loginMethod: "facebook",
+  stats: {
+    ordersCount: 0,
+    totalSpent: 0,
+    lastOrderAt: null
+  },
+  addresses: {
+    primary: "",
+    secondary: ""
+  },
+  preferences: {
+    deliveryTime: "أي وقت",
+    notifications: {
+      email: true,
+      sms: false,
+      promotional: false,
+      orderStatus: true
+    }
+  }
+}, { merge: true });
+
+
+      
+      redirectToProfile();
+    } catch (err) {
+      console.error("Facebook login error:", err);
+      showMessage('loginMsg', 'فشل في تسجيل الدخول بـ Facebook', 'error');
+      isProcessingAuth = false;
+    }
+  });
+
+  // --- Forgot Password ---
+  document.getElementById("forgot-password").addEventListener("click", async (e) => {
+    e.preventDefault();
+    const email = prompt("ادخل بريدك الإلكتروني لاستعادة كلمة المرور:");
+    if (email && email.trim()) {
+      try {
+        await sendPasswordResetEmail(auth, email.trim());
+        showMessage('loginMsg', 'تم إرسال رابط إعادة تعيين كلمة المرور!', 'success');
+      } catch (err) {
+        let errorMessage = "حدث خطأ أثناء إرسال البريد";
+        if (err.code === 'auth/user-not-found') {
+          errorMessage = "لا يوجد حساب بهذا البريد الإلكتروني";
+        } else if (err.code === 'auth/invalid-email') {
+          errorMessage = "البريد الإلكتروني غير صحيح";
+        }
+        showMessage('loginMsg', errorMessage, 'error');
+      }
+    }
+  });
+
+  // مراقبة حالة المستخدم - بدون إعادة توجيه تلقائي
+  onAuthStateChanged(auth, async (user) => {
+    // إذا كان هناك مستخدم ولكن لم نقم بتسجيل دخول حديث، لا نعيد التوجيه
+    if (user && !isProcessingAuth && !sessionStorage.getItem('justLoggedIn')) {
+      // المستخدم مسجل دخول من قبل، لكن نتركه في صفحة التسجيل
+      console.log("User already logged in, staying on login page");
+      return;
+    }
+    
+    // إذا لم يكن هناك مستخدم، نبقى في صفحة التسجيل
+    if (!user) {
+      isProcessingAuth = false;
+      return;
+    }
+  });
+
+  // إضافة زر تسجيل الخروج إذا كان المستخدم مسجل دخول
+  auth.onAuthStateChanged((user) => {
+    if (user && !isProcessingAuth) {
+      addLogoutOption();
+    }
+  });
+
+  function addLogoutOption() {
+    // التحقق من وجود الزر أولاً لتجنب التكرار
+    if (document.getElementById('currentUserLogout')) return;
+    
+    const authFooter = document.querySelector('.auth-footer');
+    const logoutDiv = document.createElement('div');
+    logoutDiv.id = 'currentUserLogout';
+    logoutDiv.style.marginTop = '10px';
+    logoutDiv.style.fontSize = '0.8rem';
+    logoutDiv.innerHTML = `
+      <p style="color: #ddd;">
+        مسجل دخول بالفعل؟ 
+        <a href="#" onclick="performLogout()" style="color: #ff6b6b;">تسجيل خروج</a>
+      </p>
+    `;
+    authFooter.appendChild(logoutDiv);
+  }
+
+  // دالة تسجيل الخروج
+  window.performLogout = async function() {
+    try {
+      await signOut(auth);
+      sessionStorage.removeItem('justLoggedIn');
+      // إعادة تحميل الصفحة مع معامل تسجيل الخروج
+      window.location.href = window.location.pathname + '?logout=true';
+    } catch (error) {
+      console.error("Logout error:", error);
+      alert("حدث خطأ أثناء تسجيل الخروج");
+    }
+  };
+</script>
+
+</body>
+</html>

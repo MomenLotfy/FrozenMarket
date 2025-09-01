@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الملف الشخصي - فروزن ماركت</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-blue: #183c6e;
+      --primary-yellow: #ffff00;
+      --light-gray: #f8f9fa;
+      --text-dark: #333;
+      --primary-color: #3a6cf4;
+      --secondary-color: #ff9d3c;
+      --accent-color: #ff5e7d;
+      --text-color: #2c3e50;
+      --light-bg: #f8f9fa;
+      --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+      --hover-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      --border-radius: 16px;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--light-gray);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background-color: white;
+      box-shadow: var(--card-shadow);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary-blue);
+      text-decoration: none;
+    }
+
+    .user-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .user-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--primary-blue);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+      transition: var(--transition);
+    }
+
+    .logout-btn {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-right: 10px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .logout-btn:hover {
+      background: #c82333;
+    }
+
+    .profile-tabs {
+      display: flex;
+      background-color: white;
+      margin: 20px 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+    }
+
+    .tab {
+      padding: 15px 25px;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+      flex: 1;
+      border-bottom: 3px solid transparent;
+    }
+
+    .tab:hover {
+      background-color: rgba(24, 60, 110, 0.05);
+    }
+
+    .tab.active {
+      border-bottom: 3px solid var(--primary-yellow);
+      color: var(--primary-blue);
+      font-weight: bold;
+      background-color: rgba(255, 255, 0, 0.1);
+    }
+
+    .tab-content {
+      display: none;
+      background-color: white;
+      padding: 25px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--card-shadow);
+      margin-bottom: 20px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .tab-content h2 {
+      color: var(--primary-blue);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--light-gray);
+    }
+
+    .profile-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .info-card {
+      background-color: white;
+      padding: 20px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      border: 1px solid #eee;
+    }
+
+    .info-card h3 {
+      margin-bottom: 15px;
+      color: var(--primary-blue);
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-card h3 i {
+      color: var(--primary-yellow);
+    }
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed #eee;
+    }
+
+    .info-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .order-card {
+      border: 1px solid #eee;
+      border-radius: var(--border-radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: white;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .order-status {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .status-delivered {
+      background-color: rgba(46, 125, 50, 0.1);
+      color: #2e7d32;
+    }
+
+    .status-pending {
+      background-color: rgba(255, 193, 7, 0.1);
+      color: #ff8f00;
+    }
+
+    .status-cancelled {
+      background-color: rgba(220, 53, 69, 0.1);
+      color: #c62828;
+    }
+
+    .order-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .order-items {
+      margin-top: 15px;
+    }
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px dotted #eee;
+    }
+
+    .order-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .settings-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: var(--primary-blue);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 3px rgba(24, 60, 110, 0.1);
+      outline: none;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      background-color: var(--primary-blue);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn:hover {
+      background-color: #132a4e;
+    }
+
+    .notification-item {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      transition: var(--transition);
+    }
+
+    .notification-item:hover {
+      background-color: #f9f9f9;
+    }
+
+    .notification-icon {
+      margin-left: 15px;
+      font-size: 20px;
+      color: var(--primary-blue);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(24, 60, 110, 0.1);
+      border-radius: 50%;
+    }
+
+    .loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .success-message {
+      background: #d4edda;
+      color: #155724;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 15px;
+      border-left: 4px solid #28a745;
+    }
+
+    .error-message {
+      background: #f8d7da;
+      color: #721c24;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 15px;
+      border-left: 4px solid #dc3545;
+    }
+
+    .no-orders {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+
+    .no-orders i {
+      font-size: 48px;
+      color: #ddd;
+      margin-bottom: 15px;
+    }
+
+    .form-check {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .form-check-input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary-blue);
+    }
+
+    .form-check-label {
+      margin-bottom: 0;
+      font-weight: normal;
+    }
+
+    @media (max-width: 768px) {
+      .profile-info,
+      .settings-form {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-tabs {
+        flex-direction: column;
+      }
+
+      .order-details {
+        grid-template-columns: 1fr;
+      }
+
+      .user-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+
+      .nav-container {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .order-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .tab {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">فروزن مارкет</a>
+      <div class="user-header">
+        <button class="logout-btn" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+        </button>
+        <div>
+          <div id="userName">اسم العميل</div>
+          <small id="userSince">عميل منذ: -</small>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="profile-tabs">
+      <div class="tab active" data-tab="profile">البيانات الشخصية</div>
+      <div class="tab" data-tab="orders">طلباتي</div>
+      <div class="tab" data-tab="settings">الإعدادات</div>
+      <div class="tab" data-tab="notifications">الإشعارات</div>
+    </div>
+
+    <!-- البيانات الشخصية -->
+    <div class="tab-content active" id="profile">
+      <h2><i class="fas fa-user"></i> البيانات الشخصية</h2>
+      <div class="profile-info">
+        <div class="info-card">
+          <h3><i class="fas fa-info-circle"></i> المعلومات الأساسية</h3>
+          <div class="info-item"><span>الاسم الكامل:</span><span id="profileName">-</span></div>
+          <div class="info-item"><span>البريد الإلكتروني:</span><span id="profileEmail">-</span></div>
+          <div class="info-item"><span>رقم الهاتف:</span><span id="profilePhone">-</span></div>
+          <div class="info-item"><span>تاريخ التسجيل:</span><span id="profileRegisterDate">-</span></div>
+        </div>
+
+        <div class="info-card">
+          <h3><i class="fas fa-map-marker-alt"></i> عنوان التوصيل</h3>
+          <div class="info-item"><span>العنوان الرئيسي:</span><span id="profileAddress">-</span></div>
+        </div>
+
+        <div class="info-card">
+          <h3><i class="fas fa-chart-line"></i> الإحصائيات</h3>
+          <div class="info-item"><span>عدد الطلبات:</span><span id="profileOrdersCount">0 طلب</span></div>
+          <div class="info-item"><span>إجمالي المشتريات:</span><span id="profileTotalSpent">0 جنيه</span></div>
+          <div class="info-item"><span>آخر طلب:</span><span id="profileLastOrder">-</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- الطلبات -->
+    <div class="tab-content" id="orders">
+      <h2><i class="fas fa-shopping-bag"></i> تاريخ الطلبات</h2>
+      <div id="ordersContainer">
+        <div class="no-orders">
+          <i class="fas fa-shopping-cart"></i>
+          <p>لا توجد طلبات حتى الآن</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- قسم الإعدادات -->
+    <div class="tab-content" id="settings">
+      <h2><i class="fas fa-cog"></i> الإعدادات والتفضيلات</h2>
+      
+      <div class="settings-form">
+        <div>
+          <h3><i class="fas fa-user-edit"></i> المعلومات الشخصية</h3>
+          <form id="personalInfoForm">
+            <div class="form-group">
+              <label for="settingsName">الاسم الكامل</label>
+              <input type="text" id="settingsName" required>
+            </div>
+            <div class="form-group">
+              <label for="settingsEmail">البريد الإلكتروني</label>
+              <input type="email" id="settingsEmail" required>
+            </div>
+            <div class="form-group">
+              <label for="settingsPhone">رقم الهاتف</label>
+              <input type="tel" id="settingsPhone">
+            </div>
+            <button type="submit" class="btn"><i class="fas fa-save"></i> حفظ التغييرات</button>
+            <div id="personalInfoMessage"></div>
+          </form>
+        </div>
+        
+        <div>
+          <h3><i class="fas fa-truck"></i> إعدادات التوصيل</h3>
+          <form id="deliverySettingsForm">
+            <div class="form-group">
+              <label for="settingsAddress">العنوان الرئيسي</label>
+              <textarea id="settingsAddress" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="settingsDeliveryPref">تفضيلات أوقات التوصيل</label>
+              <select id="settingsDeliveryPref">
+                <option>أي وقت</option>
+                <option>الصباح (9 ص - 12 م)</option>
+                <option>المساء (4 م - 9 م)</option>
+              </select>
+            </div>
+            <button type="submit" class="btn"><i class="fas fa-save"></i> حفظ التغييرات</button>
+            <div id="deliverySettingsMessage"></div>
+          </form>
+        </div>
+        
+        <div>
+          <h3><i class="fas fa-bell"></i> إعدادات الإشعارات</h3>
+          <form id="notificationSettingsForm">
+            <div class="form-check">
+              <input type="checkbox" id="notifyEmail" class="form-check-input">
+              <label for="notifyEmail" class="form-check-label">الإشعارات عبر البريد الإلكتروني</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" id="notifySms" class="form-check-input">
+              <label for="notifySms" class="form-check-label">الإشعارات عبر الرسائل النصية</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" id="notifyPromotional" class="form-check-input">
+              <label for="notifyPromotional" class="form-check-label">العروض الترويجية</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" id="notifyOrderStatus" class="form-check-input">
+              <label for="notifyOrderStatus" class="form-check-label">تنبيهات حالة الطلب</label>
+            </div>
+            <button type="submit" class="btn"><i class="fas fa-save"></i> حفظ التغييرات</button>
+            <div id="notificationSettingsMessage"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- قسم الإشعارات -->
+    <div class="tab-content" id="notifications">
+      <h2><i class="fas fa-bell"></i> الإشعارات</h2>
+      <div id="notificationsContainer">
+        <div class="notification-item">
+          <div class="notification-icon">
+            <i class="fas fa-info-circle"></i>
+          </div>
+          <div>
+            <div>مرحباً بك في فروزن ماركت</div>
+            <small>اليوم</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { 
+      getAuth, 
+      onAuthStateChanged, 
+      signOut, 
+      updateProfile 
+    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+    import { 
+      getFirestore, 
+      doc, 
+      getDoc, 
+      collection, 
+      getDocs, 
+      updateDoc, 
+      query, 
+      where, 
+      orderBy 
+    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCFk_WlW4qHcSbsLSHeWUTfGsc5W0FSE8A",
+      authDomain: "frozenmarket-5c9df.firebaseapp.com",
+      projectId: "frozenmarket-5c9df",
+      storageBucket: "frozenmarket-5c9df.firebasestorage.app",
+      messagingSenderId: "847658049541",
+      appId: "1:847658049541:web:6f4cd551a12d5e45b5bc6c",
+      measurementId: "G-32ZC3B3KPT"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let currentUser = null;
+    let userData = null;
+
+    // دالة لعرض الرسائل
+    function showMessage(elementId, message, type = 'success') {
+      const element = document.getElementById(elementId);
+      element.innerHTML = `<div class="${type === 'success' ? 'success-message' : 'error-message'}">${message}</div>`;
+      setTimeout(() => {
+        element.innerHTML = '';
+      }, 5000);
+    }
+
+    // دالة تحميل بيانات المستخدم
+    async function loadUserData(user) {
+      try {
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+          userData = userSnap.data();
+          
+          document.getElementById("userName").textContent = userData.name || user.email;
+          document.getElementById("userSince").textContent = "عميل منذ: " + (userData.registerDate || "-");
+
+          // تحديث البيانات الشخصية
+          document.getElementById("profileName").textContent = userData.name || "-";
+          document.getElementById("profileEmail").textContent = userData.email || user.email;
+          document.getElementById("profilePhone").textContent = userData.phone || "-";
+          document.getElementById("profileRegisterDate").textContent = userData.registerDate || "-";
+
+          // العنوان
+          document.getElementById("profileAddress").textContent = userData.addresses?.primary || "-";
+
+          // الإحصائيات
+          document.getElementById("profileOrdersCount").textContent = (userData.stats?.ordersCount || 0) + " طلب";
+          document.getElementById("profileTotalSpent").textContent = (userData.stats?.totalSpent || 0) + " جنيه";
+          document.getElementById("profileLastOrder").textContent = userData.stats?.lastOrderAt || "-";
+
+          // تعبئة نماذج الإعدادات
+          document.getElementById("settingsName").value = userData.name || "";
+          document.getElementById("settingsEmail").value = userData.email || "";
+          document.getElementById("settingsPhone").value = userData.phone || "";
+          document.getElementById("settingsAddress").value = userData.addresses?.primary || "";
+          document.getElementById("settingsDeliveryPref").value = userData.preferences?.deliveryTime || "أي وقت";
+
+          // إعدادات الإشعارات
+          document.getElementById("notifyEmail").checked = userData.preferences?.notifications?.email !== false;
+          document.getElementById("notifySms").checked = userData.preferences?.notifications?.sms === true;
+          document.getElementById("notifyPromotional").checked = userData.preferences?.notifications?.promotional === true;
+          document.getElementById("notifyOrderStatus").checked = userData.preferences?.notifications?.orderStatus !== false;
+
+          if (userSnap.exists()) {
+  const data = userSnap.data();
+
+  // عرض بيانات المستخدم
+  document.querySelector(".user-header div div").textContent = data.name;
+
+  // ✅ لو أدمن أضف رابط للوحة التحكم
+  if (data.role === "admin") {
+    const adminLink = document.createElement("a");
+    adminLink.href = "AdminPanel.html";
+    adminLink.textContent = "لوحة التحكم";
+    adminLink.classList.add("admin-link"); // CSS class للتنسيق
+    document.querySelector(".user-header").appendChild(adminLink);
+  }
+}
+
+
+        } else {
+          console.log("No user document found");
+        }
+      } catch (error) {
+        console.error("Error loading user data:", error);
+      }
+    }
+// دالة تحميل الطلبات
+// ✅ دالة تحميل الطلبات الخاصة بالمستخدم
+async function loadOrders(user) {
+  try {
+    const ordersRef = collection(db, "orders");
+    const q = query(
+      ordersRef,
+      where("userId", "==", user.uid),
+      orderBy("createdAt", "desc")
+    );
+
+    const ordersSnap = await getDocs(q);
+    const ordersContainer = document.getElementById("ordersContainer");
+
+    if (ordersSnap.empty) {
+      ordersContainer.innerHTML = `
+        <div class="no-orders">
+          <i class="fas fa-shopping-cart"></i>
+          <p>لا توجد طلبات حتى الآن</p>
+        </div>
+      `;
+      return;
+    }
+
+    ordersContainer.innerHTML = "";
+
+    ordersSnap.forEach((docSnapshot) => {
+      const order = docSnapshot.data();
+      const orderId = docSnapshot.id;
+
+      const statusClass =
+        order.status === "تم التوصيل"
+          ? "status-delivered"
+          : order.status === "قيد التجهيز" || order.status === "pending"
+          ? "status-pending"
+          : "status-cancelled";
+
+      const statusText = order.status || "قيد المعالجة";
+
+      // تنسيق التاريخ
+      let orderDate = "غير معروف";
+      if (order.createdAt && typeof order.createdAt.toDate === "function") {
+        const date = order.createdAt.toDate();
+        orderDate = date.toLocaleDateString("ar-EG", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+      } else if (order.timestamp) {
+        const date = new Date(order.timestamp);
+        orderDate = date.toLocaleDateString("ar-EG", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+      } else if (order.orderDate) {
+        orderDate = order.orderDate;
+      }
+
+      const card = document.createElement("div");
+      card.classList.add("order-card");
+      card.innerHTML = `
+        <div class="order-header">
+          <div>
+            <strong>رقم الطلب: #${order.orderNumber || orderId}</strong>
+            <div>تاريخ الطلب: ${orderDate}</div>
+          </div>
+          <div class="order-status ${statusClass}">
+            ${statusText}
+          </div>
+        </div>
+        <div class="order-details">
+          <div><strong>عنوان التوصيل:</strong><div>${order.address || "-"}</div></div>
+          <div><strong>طريقة الدفع:</strong><div>${order.paymentMethod === 'cod' ? 'الدفع عند الاستلام' : 'الدفع الإلكتروني'}</div></div>
+          <div><strong>إجمالي الطلب:</strong><div>${order.finalTotal ? order.finalTotal.toLocaleString('ar-EG') + ' ج.م' : (order.total || '0') + ' ج.م'}</div></div>
+        </div>
+        <div class="order-items">
+          <h4>المنتجات:</h4>
+          ${(order.items || [])
+            .map(
+              (item) => `
+            <div class="order-item">
+              <span>${item.name} - ${item.qty} ${item.unit || "حبة"}</span>
+              <span>${item.price ? item.price.toLocaleString('ar-EG') + ' ج.م' : '0 ج.م'}</span>
+            </div>
+          `
+            )
+            .join("")}
+        </div>
+      `;
+
+      ordersContainer.appendChild(card);
+    });
+  } catch (error) {
+    console.error("Error loading orders:", error);
+    document.getElementById("ordersContainer").innerHTML = `
+      <div class="no-orders">
+        <p style="color: red;">حدث خطأ في تحميل الطلبات: ${error.message}</p>
+      </div>
+    `;
+  }
+}
+
+
+    // مراقبة حالة المستخدم
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        // إعطاء وقت قصير قبل التحويل للتأكد من عدم وجود تسجيل دخول قيد المعالجة
+        setTimeout(() => {
+          if (!auth.currentUser) {
+            window.location.href = "signup&signup.html";
+          }
+        }, 1000);
+        return;
+      }
+
+      // إزالة علامة تسجيل الدخول الحديث
+      sessionStorage.removeItem('justLoggedIn');
+      
+      currentUser = user;
+      
+      // إظهار مؤشر التحميل
+      document.body.classList.add('loading');
+      
+      try {
+        await loadUserData(user);
+        await loadOrders(user);
+      } catch (error) {
+        console.error("Error loading user profile:", error);
+        showMessage('personalInfoMessage', 'حدث خطأ في تحميل البيانات', 'error');
+      } finally {
+        // إخفاء مؤشر التحميل
+        document.body.classList.remove('loading');
+      }
+    });
+
+    // تسجيل الخروج
+    window.logout = async function() {
+      try {
+        await signOut(auth);
+        sessionStorage.removeItem('justLoggedIn');
+        window.location.href = "signup&signup.html?logout=true";
+      } catch (error) {
+        console.error("Logout error:", error);
+        alert("حدث خطأ أثناء تسجيل الخروج");
+      }
+    };
+
+    // حفظ المعلومات الشخصية
+    document.getElementById("personalInfoForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById("settingsName").value.trim();
+      const email = document.getElementById("settingsEmail").value.trim();
+      const phone = document.getElementById("settingsPhone").value.trim();
+
+      if (!name || !email) {
+        showMessage('personalInfoMessage', 'يرجى ملء جميع الحقول المطلوبة', 'error');
+        return;
+      }
+
+      try {
+        // تحديث الملف الشخصي في Auth
+        await updateProfile(currentUser, {
+          displayName: name
+        });
+
+        // تحديث البيانات في Firestore
+        const userRef = doc(db, "users", currentUser.uid);
+        await updateDoc(userRef, {
+          name: name,
+          email: email,
+          phone: phone
+        });
+
+        userData.name = name;
+        userData.email = email;
+        userData.phone = phone;
+
+        // تحديث العرض
+        document.getElementById("userName").textContent = name;
+        document.getElementById("profileName").textContent = name;
+        document.getElementById("profileEmail").textContent = email;
+        document.getElementById("profilePhone").textContent = phone;
+
+        showMessage('personalInfoMessage', 'تم حفظ التغييرات بنجاح', 'success');
+      } catch (error) {
+        console.error("Error updating personal info:", error);
+        showMessage('personalInfoMessage', 'حدث خطأ أثناء حفظ التغييرات', 'error');
+      }
+    });
+
+    // حفظ إعدادات التوصيل
+    document.getElementById("deliverySettingsForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      const address = document.getElementById("settingsAddress").value.trim();
+      const deliveryPref = document.getElementById("settingsDeliveryPref").value;
+
+      try {
+        const userRef = doc(db, "users", currentUser.uid);
+        await updateDoc(userRef, {
+          addresses: {
+            primary: address
+          },
+          preferences: {
+            ...userData.preferences,
+            deliveryTime: deliveryPref
+          }
+        });
+
+        // تحديث البيانات المحلية
+        userData.addresses = { primary: address };
+        userData.preferences = { ...userData.preferences, deliveryTime: deliveryPref };
+
+        // تحديث العرض
+        document.getElementById("profileAddress").textContent = address || "-";
+
+        showMessage('deliverySettingsMessage', 'تم حفظ إعدادات التوصيل بنجاح', 'success');
+      } catch (error) {
+        console.error("Error updating delivery settings:", error);
+        showMessage('deliverySettingsMessage', 'حدث خطأ أثناء حفظ الإعدادات', 'error');
+      }
+    });
+
+    // حفظ إعدادات الإشعارات
+    document.getElementById("notificationSettingsForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      const notifications = {
+        email: document.getElementById("notifyEmail").checked,
+        sms: document.getElementById("notifySms").checked,
+        promotional: document.getElementById("notifyPromotional").checked,
+        orderStatus: document.getElementById("notifyOrderStatus").checked
+      };
+
+      try {
+        const userRef = doc(db, "users", currentUser.uid);
+        await updateDoc(userRef, {
+          preferences: {
+            ...userData.preferences,
+            notifications: notifications
+          }
+        });
+
+        userData.preferences = { ...userData.preferences, notifications: notifications };
+
+        showMessage('notificationSettingsMessage', 'تم حفظ إعدادات الإشعارات بنجاح', 'success');
+      } catch (error) {
+        console.error("Error updating notification settings:", error);
+        showMessage('notificationSettingsMessage', 'حدث خطأ أثناء حفظ الإعدادات', 'error');
+      }
+    });
+  </script>
+
+  <script>
+    // التنقل بين التابات
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabs = document.querySelectorAll('.tab');
+      const tabContents = document.querySelectorAll('.tab-content');
+      
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const targetTab = tab.getAttribute('data-tab');
+          tabs.forEach(t => t.classList.remove('active'));
+          tabContents.forEach(tc => tc.classList.remove('active'));
+          tab.classList.add('active');
+          document.getElementById(targetTab).classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

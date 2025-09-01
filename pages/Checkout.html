@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إتمام الشراء - فروزن ماركت</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-blue: #183c6e;
+      --primary-yellow: #ffff00;
+      --light-gray: #f8f9fa;
+      --text-dark: #333;
+      --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+      --hover-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      --border-radius: 16px;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--light-gray);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: var(--primary-blue);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      transition: var(--transition);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .back-btn:hover {
+      background: #102a4e;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 30px;
+      color: var(--primary-blue);
+      font-size: 2.2rem;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .page-title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--primary-yellow);
+      border-radius: 2px;
+    }
+
+    .checkout-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .checkout-section {
+      background: white;
+      padding: 25px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--card-shadow);
+      margin-bottom: 25px;
+      transition: var(--transition);
+    }
+
+    .checkout-section:hover {
+      box-shadow: var(--hover-shadow);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 25px;
+      color: var(--primary-blue);
+      font-size: 1.3rem;
+      font-weight: bold;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-yellow);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .form-control {
+       text-align: right;
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      font-size: 16px;
+      transition: var(--transition);
+      background: #f8f9fa;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary-blue);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(24, 60, 110, 0.1);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .payment-options {
+      display: grid;
+      gap: 15px;
+    }
+
+    .payment-option {
+      border: 2px solid #e0e0e0;
+      padding: 20px;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: var(--transition);
+      background: #f8f9fa;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .payment-option:hover {
+      border-color: var(--primary-blue);
+      background: white;
+    }
+
+    .payment-option.selected {
+      border-color: var(--primary-blue);
+      background: #f0f7ff;
+      box-shadow: 0 4px 15px rgba(24, 60, 110, 0.2);
+    }
+
+    .payment-option input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--primary-blue);
+    }
+
+    .payment-info {
+      flex: 1;
+    }
+
+    .payment-info h4 {
+      margin: 0 0 5px 0;
+      color: var(--primary-blue);
+    }
+
+    .payment-info p {
+      margin: 0;
+      color: #7f8c8d;
+      font-size: 0.9rem;
+    }
+
+    .visa-form {
+      margin-top: 20px;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      border: 1px solid #e0e0e0;
+      display: none;
+    }
+
+    .visa-form.show {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .order-summary {
+      position: sticky;
+      top: 20px;
+      height: fit-content;
+    }
+
+    .order-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .order-item:last-child {
+      border-bottom: none;
+    }
+
+    .order-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid var(--primary-blue);
+    }
+
+    .item-details {
+      flex: 1;
+    }
+
+    .item-name {
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: var(--primary-blue);
+    }
+
+    .item-price {
+      color: #7f8c8d;
+      font-size: 0.9rem;
+    }
+
+    .item-total {
+      font-weight: bold;
+      color: var(--primary-blue);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .summary-row:last-child {
+      border-bottom: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--primary-blue);
+      padding-top: 15px;
+      border-top: 2px solid var(--primary-yellow);
+    }
+
+    .discount-row {
+      color: #27ae60;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      padding: 18px;
+      background: var(--primary-blue);
+      border: none;
+      border-radius: 15px;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .checkout-btn:hover:not(:disabled) {
+      background: #102a4e;
+      box-shadow: 0 8px 25px rgba(24, 60, 110, 0.3);
+    }
+
+    .checkout-btn:disabled {
+      background: #bdc3c7;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 60px 20px;
+      color: #7f8c8d;
+    }
+
+    .empty-cart i {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      color: #bdc3c7;
+    }
+
+    .empty-cart h3 {
+      margin-bottom: 10px;
+      color: var(--primary-blue);
+    }
+
+    .continue-shopping {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 30px;
+      background: var(--primary-blue);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      margin-top: 20px;
+      transition: var(--transition);
+    }
+
+    .continue-shopping:hover {
+      background: #102a4e;
+    }
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10000;
+      min-width: 350px;
+      max-width: 500px;
+      padding: 20px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      transform: translateX(100%);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .notification.success {
+      background: linear-gradient(135deg, rgba(39, 174, 96, 0.95), rgba(46, 204, 113, 0.95));
+      color: white;
+    }
+
+    .notification.error {
+      background: linear-gradient(135deg, rgba(231, 76, 60, 0.95), rgba(192, 57, 43, 0.95));
+      color: white;
+    }
+
+    .notification.warning {
+      background: linear-gradient(135deg, rgba(243, 156, 18, 0.95), rgba(230, 126, 34, 0.95));
+      color: white;
+    }
+
+    .notification-icon {
+      font-size: 24px;
+    }
+
+    .notification-content {
+      flex: 1;
+      font-weight: 600;
+    }
+
+    .notification-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0.8;
+      padding: 5px;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+
+    .notification-close:hover {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 968px) {
+      .checkout-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .order-summary {
+        order: -1;
+        position: static;
+      }
+      
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .container {
+        padding: 15px;
+      }
+      
+      .checkout-section {
+        padding: 20px;
+      }
+      
+      .notification {
+        min-width: 300px;
+        right: 10px;
+        top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <a href="cart.html" class="back-btn">
+      <i class="fas fa-arrow-right"></i>
+      العودة للسلة
+    </a>
+
+    <h1 class="page-title"><i class="fas fa-credit-card"></i> إتمام الشراء</h1>
+
+    <div class="checkout-container" id="checkout-container">
+      <!-- Left Column - Forms -->
+      <div class="checkout-forms">
+        <!-- Shipping Information -->
+        <div class="checkout-section">
+          <div class="section-title">
+            <i class="fas fa-truck"></i>
+            معلومات الشحن
+          </div>
+          <form id="shipping-form">
+            <div class="form-group">
+              <label for="fullName">الاسم الكامل *</label>
+              <input type="text" id="fullName" class="form-control" placeholder="أدخل اسمك الكامل" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">رقم الهاتف *</label>
+              <input type="tel" id="phone" class="form-control" placeholder="+20 1xxxxxxxxx" required>
+            </div>
+            <div class="form-group">
+              <label for="address">العنوان التفصيلي *</label>
+              <input type="text" id="address" class="form-control" placeholder="الشارع، المنطقة، رقم المبنى" required>
+            </div>
+            <div class="form-group">
+              <label for="notes">ملاحظات التوصيل</label>
+              <input type="text" id="notes" class="form-control" placeholder="معلومات إضافية للمندوب (اختياري)">
+            </div>
+          </form>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="checkout-section">
+          <div class="section-title">
+            <i class="fas fa-credit-card"></i>
+            طريقة الدفع
+          </div>
+          <div class="payment-options">
+            <div class="payment-option selected" data-method="cod">
+              <input type="radio" name="payment" id="cod" checked>
+              <i class="fas fa-money-bill-wave" style="font-size: 2rem; color: #27ae60;"></i>
+              <div class="payment-info">
+                <h4>الدفع عند الاستلام</h4>
+                <p>ادفع نقداً للمندوب عند وصول الطلب</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+      <!-- Right Column - Order Summary -->
+      <div class="order-summary">
+        <div class="checkout-section" id="order-summary-section">
+          <div class="section-title">
+            <i class="fas fa-receipt"></i>
+            ملخص الطلب
+          </div>
+          <div id="order-items">
+            <!-- Order items will be loaded here -->
+          </div>
+          <div class="summary-totals">
+            <div class="summary-row">
+              <span>المجموع الفرعي</span>
+              <span id="subtotal">0 ج.م</span>
+            </div>
+            <div class="summary-row discount-row" id="discount-row" style="display: none;">
+              <span>خصم</span>
+              <span id="discount-amount">-0 ج.م</span>
+            </div>
+           
+            <div class="summary-row">
+              <span>الإجمالي النهائي</span>
+              <span id="final-total">0 ج.م</span>
+            </div>
+          </div>
+          <button class="checkout-btn" id="confirm-order" type="button">
+            <i class="fas fa-lock"></i>
+            تأكيد الطلب
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+   
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { 
+      getAuth, 
+      onAuthStateChanged, 
+      signOut 
+    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+    import { 
+      getFirestore, 
+      doc, 
+      getDoc, 
+      collection, 
+      addDoc, 
+      updateDoc,
+      setDoc,
+      serverTimestamp 
+    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCFk_WlW4qHcSbsLSHeWUTfGsc5W0FSE8A",
+      authDomain: "frozenmarket-5c9df.firebaseapp.com",
+      projectId: "frozenmarket-5c9df",
+      storageBucket: "frozenmarket-5c9df.firebasestorage.app",
+      messagingSenderId: "847658049541",
+      appId: "1:847658049541:web:6f4cd551a12d5e45b5bc6c",
+      measurementId: "G-32ZC3B3KPT"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let currentUser = null;
+    let userData = null;
+    let cart = [];
+    let selectedPayment = 'cod';
+
+    // Utility functions
+    function isStorageAvailable() {
+      try {
+        const test = 'test';
+        if (typeof(Storage) !== "undefined") {
+          localStorage.setItem(test, test);
+          localStorage.removeItem(test);
+          return true;
+        }
+        return false;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function loadCart() {
+      try {
+        if (isStorageAvailable()) {
+          const saved = localStorage.getItem("cart");
+          return saved ? JSON.parse(saved) : [];
+        } else {
+          return window.cartData || [];
+        }
+      } catch (error) {
+        console.error("Error loading cart:", error);
+        return [];
+      }
+    }
+
+    function saveCart(cartData) {
+      try {
+        if (isStorageAvailable()) {
+          localStorage.setItem("cart", JSON.stringify(cartData));
+        } else {
+          window.cartData = cartData;
+        }
+        return true;
+      } catch (error) {
+        console.error("Error saving cart:", error);
+        return false;
+      }
+    }
+
+    function showNotification(message, type = 'success', duration = 5000) {
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      
+      const icons = {
+        success: 'fa-check-circle',
+        error: 'fa-exclamation-triangle',
+        warning: 'fa-exclamation-circle'
+      };
+      
+      notification.innerHTML = `
+        <div class="notification-icon">
+          <i class="fas ${icons[type] || icons.success}"></i>
+        </div>
+        <div class="notification-content">${message}</div>
+        <button class="notification-close" onclick="this.parentElement.remove()">
+          <i class="fas fa-times"></i>
+        </button>
+      `;
+      
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.classList.add('show');
+      }, 100);
+      
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.remove();
+        }
+      }, duration);
+    }
+
+    function formatPrice(price) {
+      return price.toLocaleString('ar-EG') + ' ج.م';
+    }
+
+    function validateForm() {
+      const requiredFields = ['fullName', 'phone', 'address'];
+      let isValid = true;
+      
+      requiredFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (!field.value.trim()) {
+          field.style.borderColor = '#e74c3c';
+          isValid = false;
+        } else {
+          field.style.borderColor = '#e0e0e0';
+        }
+      });
+      
+      // Validate phone number
+      const phone = document.getElementById('phone').value;
+      const phoneRegex = /^(\+20|0)?1[0125]\d{8}$/;
+      if (!phoneRegex.test(phone.replace(/\s/g, ''))) {
+        document.getElementById('phone').style.borderColor = '#e74c3c';
+        isValid = false;
+      }
+      
+      return isValid;
+    }
+
+    function renderOrderSummary() {
+      const orderItems = document.getElementById('order-items');
+      const subtotalEl = document.getElementById('subtotal');
+      const discountEl = document.getElementById('discount-amount');
+      const discountRow = document.getElementById('discount-row');
+      const finalTotalEl = document.getElementById('final-total');
+      
+      if (cart.length === 0) {
+        document.getElementById('checkout-container').innerHTML = `
+          <div class="empty-cart">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>السلة فارغة</h3>
+            <p>لا توجد منتجات لإتمام الشراء</p>
+            <a href="../index.html" class="continue-shopping">
+              <i class="fas fa-arrow-right"></i>
+              العودة للتسوق
+            </a>
+          </div>
+        `;
+        return;
+      }
+      
+      // Render cart items
+      orderItems.innerHTML = '';
+      let subtotal = 0;
+      
+      cart.forEach(item => {
+        const itemTotal = item.price * item.qty;
+        subtotal += itemTotal;
+        
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'order-item';
+        itemDiv.innerHTML = `
+          <img src="${item.image || 'https://via.placeholder.com/60x60?text=صورة'}" 
+               alt="${item.name}" 
+               onerror="this.src='https://via.placeholder.com/60x60?text=صورة'">
+          <div class="item-details">
+            <div class="item-name">${item.name}</div>
+            <div class="item-price">${formatPrice(item.price)} × ${item.qty}</div>
+          </div>
+          <div class="item-total">${formatPrice(itemTotal)}</div>
+        `;
+        orderItems.appendChild(itemDiv);
+      });
+      
+      // Calculate totals
+      const discount = subtotal > 300 ? Math.round(subtotal * 0.02) : 0;
+      const finalTotal = subtotal - discount;
+      
+      // Update display
+      subtotalEl.textContent = formatPrice(subtotal);
+      
+      if (discount > 0) {
+        discountEl.textContent = '-' + formatPrice(discount);
+        discountRow.style.display = 'flex';
+      } else {
+        discountRow.style.display = 'none';
+      }
+      
+      finalTotalEl.textContent = formatPrice(finalTotal);
+    }
+
+    function setupPaymentOptions() {
+      const paymentOptions = document.querySelectorAll('.payment-option');
+      const visaForm = document.getElementById('visa-form');
+      
+      paymentOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          // Remove selected class from all options
+          paymentOptions.forEach(opt => opt.classList.remove('selected'));
+          
+          // Add selected class to clicked option
+          this.classList.add('selected');
+          
+          // Update selected payment method
+          selectedPayment = this.dataset.method;
+          
+          // Check the corresponding radio button
+          const radio = this.querySelector('input[type="radio"]');
+          radio.checked = true;
+          
+          // Show/hide visa form
+          if (selectedPayment === 'visa' && visaForm) {
+            visaForm.classList.add('show');
+          } else if (visaForm) {
+            visaForm.classList.remove('show');
+          }
+        });
+      });
+    }
+
+    async function confirmOrder() {
+      if (!validateForm()) {
+        showNotification('يرجى ملء جميع الحقول المطلوبة بشكل صحيح', 'error');
+        return;
+      }
+      
+      // Get form data
+      const formData = {
+        fullName: document.getElementById('fullName').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        address: document.getElementById('address').value.trim(),
+        notes: document.getElementById('notes').value.trim(),
+        paymentMethod: selectedPayment,
+        items: cart,
+        subtotal: cart.reduce((sum, item) => sum + (item.price * item.qty), 0),
+        timestamp: new Date().toISOString()
+      };
+      
+      // Calculate final totals
+      const discount = formData.subtotal > 300 ? Math.round(formData.subtotal * 0.02) : 0;
+      const finalTotal = formData.subtotal - discount;
+      
+      formData.discount = discount;
+      formData.finalTotal = finalTotal;
+      
+      // Simulate order processing
+      const confirmBtn = document.getElementById('confirm-order');
+      confirmBtn.disabled = true;
+      confirmBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري معالجة الطلب...';
+      
+      try {
+        // Save order to Firestore
+        const orderNumber = 'ORD-' + Date.now().toString().slice(-6);
+        formData.orderNumber = orderNumber;
+        formData.status = 'pending';
+        formData.userId = currentUser.uid;
+        formData.userEmail = currentUser.email;
+        
+        // Add order to Firestore
+        const ordersRef = collection(db, "orders");
+        const orderDoc = await addDoc(ordersRef, {
+          ...formData,
+          createdAt: serverTimestamp()
+        });
+        
+        // Update user statistics
+        const userRef = doc(db, "users", currentUser.uid);
+        const userSnap = await getDoc(userRef);
+        
+        if (userSnap.exists()) {
+          const userData = userSnap.data();
+          const ordersCount = (userData.stats?.ordersCount || 0) + 1;
+          const totalSpent = (userData.stats?.totalSpent || 0) + finalTotal;
+          
+          await updateDoc(userRef, {
+            "stats.ordersCount": ordersCount,
+            "stats.totalSpent": totalSpent,
+            "stats.lastOrderAt": new Date().toLocaleDateString('ar-EG'),
+            "addresses.primary": formData.address
+          });
+        } else {
+          await setDoc(userRef, {
+            name: formData.fullName,
+            email: currentUser.email,
+            phone: formData.phone,
+            stats: {
+              ordersCount: 1,
+              totalSpent: finalTotal,
+              lastOrderAt: new Date().toLocaleDateString('ar-EG')
+            },
+            addresses: {
+              primary: formData.address
+            },
+            registerDate: new Date().toLocaleDateString('ar-EG')
+          }, { merge: true });
+        }
+        
+        // Clear cart
+        cart = [];
+        saveCart(cart);
+        
+        // Show success message
+        showNotification(`تم تأكيد طلبك بنجاح! رقم الطلب: ${orderNumber}`, 'success', 8000);
+        
+        // Redirect to success page or show success state
+        setTimeout(() => {
+          showOrderSuccess(orderNumber, formData);
+        }, 2000);
+        
+      } catch (error) {
+        console.error("Error saving order:", error);
+        
+        showNotification('حدث خطأ أثناء حفظ الطلب، يرجى المحاولة مرة أخرى', 'error');
+        confirmBtn.disabled = false;
+        confirmBtn.innerHTML = '<i class="fas fa-lock"></i> تأكيد الطلب';
+      }
+    }
+
+    function showOrderSuccess(orderNumber, orderData) {
+      document.getElementById('checkout-container').innerHTML = `
+        <div style="text-align: center; padding: 60px 20px; background: white; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1);">
+          <div style="color: #27ae60; font-size: 4rem; margin-bottom: 20px;">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h2 style="color: #2c3e50; margin-bottom: 15px;">تم تأكيد طلبك بنجاح!</h2>
+          <p style="color: #7f8c8d; font-size: 1.1rem; margin-bottom: 30px;">
+            رقم الطلب: <strong style="color: #2c3e50;">${orderNumber}</strong>
+          </p>
+          <div style="background: #f8f9fa; padding: 20px; border-radius: 15px; margin: 30px 0; text-align: right;">
+            <h4 style="margin-bottom: 15px; color: #2c3e50;">تفاصيل الطلب:</h4>
+            <p><strong>الاسم:</strong> ${orderData.fullName}</p>
+            <p><strong>الهاتف:</strong> ${orderData.phone}</p>
+            <p><strong>العنوان:</strong> ${orderData.address}</p>
+            <p><strong>طريقة الدفع:</strong> ${orderData.paymentMethod === 'cod' ? 'الدفع عند الاستلام' : 'الدفع الإلكتروني'}</p>
+            <p><strong>إجمالي المبلغ:</strong> ${formatPrice(orderData.finalTotal)}</p>
+          </div>
+          <div style="color: #7f8c8d; margin: 30px 0;">
+            <p><i class="fas fa-clock"></i> سيتم التواصل معك خلال 30 دقيقة لتأكيد الطلب</p>
+            <p><i class="fas fa-truck"></i> وقت التوصيل المتوقع: 2-4 ساعات</p>
+          </div>
+          <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 40px;">
+            <a href="../index.html" style="display: inline-flex; align-items: center; gap: 10px; padding: 15px 30px; background: #183c6e; color: white; text-decoration: none; border-radius: 25px; transition: all 0.3s ease;">
+              <i class="fas fa-home"></i>
+              العودة للرئيسية
+            </a>
+            <a href="cart.html" style="display: inline-flex; align-items: center; gap: 10px; padding: 15px 30px; background: #ecf0f1; color: #2c3e50; text-decoration: none; border-radius: 25px; transition: all 0.3s ease;">
+              <i class="fas fa-shopping-cart"></i>
+              طلب جديد
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
+    // Load user data and auto-fill form
+    async function loadUserData() {
+      try {
+        const userRef = doc(db, "users", currentUser.uid);
+        const userSnap = await getDoc(userRef);
+        
+        if (userSnap.exists()) {
+          userData = userSnap.data();
+          
+          // Auto-fill form with user data
+          if (userData.name) document.getElementById('fullName').value = userData.name;
+          if (userData.phone) document.getElementById('phone').value = userData.phone;
+          if (userData.addresses?.primary) document.getElementById('address').value = userData.addresses.primary;
+        }
+      } catch (error) {
+        console.error("Error loading user data:", error);
+      }
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check authentication
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+          // Redirect to login if not authenticated
+          showNotification('يجب تسجيل الدخول أولاً', 'error');
+          setTimeout(() => {
+            window.location.href = 'signup&login.html';
+          }, 2000);
+          return;
+        }
+        
+        currentUser = user;
+        
+        // Load user data
+        await loadUserData();
+        
+        // Load cart data
+        cart = loadCart();
+        
+        // Check if cart is empty and redirect
+        if (cart.length === 0) {
+          setTimeout(() => {
+            if (confirm('السلة فارغة. هل تريد العودة للتسوق؟')) {
+              window.location.href = '../index.html';
+            }
+          }, 1000);
+        }
+        
+        // Render order summary
+        renderOrderSummary();
+        
+        // Setup payment options
+        setupPaymentOptions();
+        
+        // Setup form validation
+        const inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(input => {
+          input.addEventListener('blur', function() {
+            if (this.hasAttribute('required') && !this.value.trim()) {
+              this.style.borderColor = '#e74c3c';
+            } else {
+              this.style.borderColor = '#e0e0e0';
+            }
+          });
+          
+          input.addEventListener('focus', function() {
+            this.style.borderColor = '#183c6e';
+          });
+        });
+        
+        // Setup confirm order button
+        document.getElementById('confirm-order').addEventListener('click', confirmOrder);
+      });
+    });
+
+    // Handle page visibility change to refresh cart
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden) {
+        const newCart = loadCart();
+        if (JSON.stringify(newCart) !== JSON.stringify(cart)) {
+          cart = newCart;
+          renderOrderSummary();
+        }
+      }
+    });
+
+    // Handle browser back button
+    window.addEventListener('beforeunload', function(e) {
+      // Don't show warning if cart is empty or order is being processed
+      const confirmBtn = document.getElementById('confirm-order');
+      if (cart.length > 0 && !confirmBtn.disabled) {
+        e.preventDefault();
+        e.returnValue = 'هل أنت متأكد من مغادرة الصفحة؟ ستفقد البيانات المدخلة.';
+      }
+    });
+  </script>
+</body>
+</html>
