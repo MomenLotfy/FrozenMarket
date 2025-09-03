@@ -9,579 +9,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-    <style>
-        :root {
-            --primary-blue: #183c6e;
-            --primary-yellow: #ffff00;
-            --light-gray: #f8f9fa;
-            --text-dark: #333;
-            --cube-size: 50vmin;
-            --border-radius: 16px;
-            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-             --primary-blue: #183c6e;
-            --primary-yellow: #ffff00;
-            --light-gray: #f8f9fa;
-            --text-dark: #333;
-            --primary-color: #3a6cf4;
-            --secondary-color: #ff9d3c;
-            --accent-color: #ff5e7d;
-            --text-color: #2c3e50;
-            --light-bg: #f8f9fa;
-            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-            --hover-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            --border-radius: 16px;
-            --transition: all 0.3s ease;
-        }
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        body {
-            font-family: "Cairo", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--light-gray);
-            color: var(--text-dark);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        
-    
-
-        /* Desktop Navbar */
-        .navbar-custom {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, #2451a0 100%);
-            padding: 1rem 0;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1030;
-            transition: all 0.3s ease;
-        }
-
-        .navbar-brand {
-            font-size: 2rem;
-            font-weight: 800;
-            color: white !important;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-         .navbar-nav{
-          margin-right: 80px;
-         }
-        .navbar-nav .nav-link {
-            color: white !important;
-            font-weight: 600;
-            padding: 1rem 1.5rem !important;
-            transition: all 0.3s ease;
-            position: relative;
-            border-radius: 10px;
-            margin-right: 30px;
-            margin: 0 5px;
-        }
-
-        .navbar-nav .nav-link:hover,
-        .navbar-nav .nav-link:focus {
-            outline: none;
-        }
-
-        /* Products Dropdown */
-        .dropdown-custom {
-            position: relative;
-        }
-
-        .dropdown-arrow {
-            transition: transform 0.3s ease;
-            margin-right: 8px;
-        }
-
-        .dropdown-custom:hover .dropdown-arrow {
-            transform: rotate(180deg);
-        }
-
-        .custom-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            min-width: 280px;
-            padding: 20px 0;
-            display: none;
-            z-index: 1000;
-            transform: translateY(-10px);
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .dropdown-custom:hover .custom-dropdown {
-            display: block;
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .custom-dropdown a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 15px 25px;
-            color: var(--text-dark);
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border-right: 4px solid transparent;
-        }
-
-        .custom-dropdown a:hover {
-            background: linear-gradient(90deg, var(--primary-yellow), rgba(255, 255, 0, 0.1));
-            border-right-color: var(--primary-blue);
-            color: var(--primary-blue);
-            transform: translateX(5px);
-        }
-
-        .custom-dropdown a i {
-            font-size: 1.2rem;
-            width: 24px;
-            text-align: center;
-        }
-
-        /* Cart Badge */
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            left: -8px;
-            background: linear-gradient(45deg, #fff06b, #ff9d3c);
-            color: var(--primary-blue);
-            font-size: 12px;
-            font-weight: bold;
-            border-radius: 50%;
-            min-width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        /* Mobile Bottom Navigation */
-        .mobile-bottom-nav {
-            display: none;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.15);
-            z-index: 1000;
-            padding: 10px 0;
-        }
-
-        .bottom-nav-item {
-            flex: 1;
-            text-align: center;
-            padding: 10px;
-            text-decoration: none;
-            color: var(--text-dark);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .bottom-nav-item:hover,
-        .bottom-nav-item.active {
-            color: var(--primary-blue);
-            transform: translateY(-2px);
-        }
-
-        .bottom-nav-item i {
-            font-size: 1.5rem;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .bottom-nav-item span {
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-top: 50px;
-            padding: 80px 20px 40px;
-        }
-        
-        h1 {
-            color: var(--primary-blue);
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
-            position: relative;
-            padding-bottom: 15px;
-        }
-        
-        h1::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            right: 50%;
-            transform: translateX(50%);
-            width: 100px;
-            height: 4px;
-            background: var(--primary-yellow);
-            border-radius: 2px;
-        }
-        
-        .cube-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1000px;
-            margin-top: 120px;
-            margin-bottom: 100px;
-
-        }
-        
-        .cube {
-            width: var(--cube-size);
-            height: var(--cube-size);
-            position: relative;
-            transform-style: preserve-3d;
-            animation: rotate3d 20s infinite linear;
-            cursor: pointer;
-        }
-        
-        .cube-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-size: calc(var(--cube-size) * 0.08);
-            font-weight: bold;
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid var(--primary-blue);
-            color: var(--primary-blue);
-            text-align: center;
-            padding: 20px;
-            backface-visibility: visible;
-            box-shadow: var(--card-shadow);
-            transition: all 0.5s ease;
-            border-radius: 8px;
-        }
-        
-        .cube-front { 
-            transform: translateZ(calc(var(--cube-size) * 0.5)); 
-            background: rgba(24, 60, 110, 0.1); 
-            border-color: var(--primary-blue);
-        }
-        
-        .cube-back { 
-            transform: translateZ(calc(var(--cube-size) * -0.5)) rotateY(180deg); 
-            background: rgba(255, 255, 0, 0.1); 
-            border-color: var(--primary-yellow);
-        }
-        
-        .cube-right { 
-            transform: translateX(calc(var(--cube-size) * 0.5)) rotateY(90deg); 
-            background: rgba(24, 60, 110, 0.15); 
-            border-color: var(--primary-blue);
-        }
-        
-        .cube-left { 
-            transform: translateX(calc(var(--cube-size) * -0.5)) rotateY(-90deg); 
-            background: rgba(255, 255, 0, 0.15); 
-            border-color: var(--primary-yellow);
-        }
-        
-        .cube-top { 
-            transform: translateY(calc(var(--cube-size) * -0.5)) rotateX(90deg); 
-            background: rgba(24, 60, 110, 0.2); 
-            border-color: var(--primary-blue);
-        }
-        
-        .cube-bottom { 
-            transform: translateY(calc(var(--cube-size) * 0.5)) rotateX(-90deg); 
-            background: rgba(255, 255, 0, 0.2); 
-            border-color: var(--primary-yellow);
-        }
-        
-        .text-large {
-            font-size: calc(var(--cube-size) * 0.12);
-            margin-bottom: calc(var(--cube-size) * 0.05);
-            color: var(--primary-blue);
-            font-weight: bold;
-        }
-        
-        .text-medium {
-            font-size: calc(var(--cube-size) * 0.07);
-            line-height: 1.5;
-            color: var(--text-dark);
-        }
-        
-        .icon {
-            font-size: calc(var(--cube-size) * 0.15);
-            margin-bottom: calc(var(--cube-size) * 0.05);
-            color: var(--primary-blue);
-        }
-        
-        .cube-back .icon,
-        .cube-left .icon,
-        .cube-bottom .icon {
-            color: #b8860b;
-        }
-        
-        .cube-back .text-large,
-        .cube-left .text-large,
-        .cube-bottom .text-large {
-            color: #b8860b;
-        }
-        
-        @keyframes rotate3d {
-            0% { transform: rotateX(0) rotateY(0) rotateZ(0); }
-            100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
-        }
-        
-        .slider-container {
-            width: 90%;
-            max-width: 400px;
-            margin: 30px 0 15px;
-            background: white;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--card-shadow);
-        }
-        
-        input[type="range"] {
-            width: 100%;
-            height: 10px;
-            appearance: none;
-            -webkit-appearance: none;
-            background: #e0e0e0;
-            border-radius: 5px;
-            outline: none;
-            margin-top: 10px;
-        }
-        
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            background: var(--primary-blue);
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        
-           /* Footer */
-        .footer {
-            background: #1a1a1a;
-            color: white;
-            padding: 60px 0 20px;
-        }
-
-        .footer h5 {
-            color: var(--primary-yellow);
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .footer a {
-            color: #ccc;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer a:hover {
-            color: var(--primary-yellow);
-        }
-
-        .social-links a {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            text-align: center;
-            line-height: 50px;
-            border-radius: 50%;
-            margin: 0 10px;
-            transition: all 0.3s ease;
-            font-size: 1.5rem;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .social-links a:hover {
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .social-links a.facebook {
-            color: #4267B2;
-        }
-
-        .social-links a.whatsapp {
-            color: #25D366;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .navbar-custom {
-                display: none;
-            }
-            
-            .mobile-bottom-nav {
-                display: flex;
-            }
-            
-            body {
-                padding-bottom: 80px;
-            }
-            
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-            
-            .hero-content p {
-                font-size: 1.2rem;
-            }
-            
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-            
-            .feature-card,
-            .contact-form,
-            .contact-info {
-                padding: 30px 20px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero-content h1 {
-                font-size: 1.8rem;
-            }
-            
-            .btn-hero {
-                padding: 15px 30px;
-                font-size: 1rem;
-            }
-        }
-
-        /* Modern animations */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.6s ease;
-        }
-
-        .animate-on-scroll.animated {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Notification Styles */
-        .modern-notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 10000;
-            min-width: 320px;
-            max-width: 400px;
-            padding: 16px 20px;
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-            font-size: 14px;
-            line-height: 1.4;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transform: translateX(100%);
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .modern-notification.show {
-            transform: translateX(0);
-            opacity: 1;
-        }
-
-        .modern-notification.success {
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.9), rgba(22, 163, 74, 0.9));
-            color: white;
-        }
-        @media (max-width: 768px) {
-            :root {
-                --cube-size: 50vmin;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .custom-dropdown {
-                right: -50px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            :root {
-                --cube-size: 60vmin;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .text-large {
-                font-size: calc(var(--cube-size) * 0.1);
-            }
-            
-            .text-medium {
-                font-size: calc(var(--cube-size) * 0.06);
-            }
-            
-            .icon {
-                font-size: calc(var(--cube-size) * 0.12);
-            }
-            
-            .footer .row > div {
-                margin-bottom: 30px;
-            }
-        }
-    </style>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="../css/newstyle.css">
 </head>
 <body>
     <!-- Desktop Navbar -->
@@ -617,6 +47,9 @@
                     <i class="fas fa-shopping-cart fa-lg"></i>
                     <span id="cart-count" class="cart-count">0</span>
                 </a>
+                <a class="nav-link" href="pages/">
+                 <i class="fas fa-heart fa-lg"></i>
+                </a>
                 <a class="nav-link" href="signup&signup.html">
                     <i class="fas fa-user fa-lg"></i>
                 </a>
@@ -624,26 +57,64 @@
         </div>
     </nav>
 
-    <!-- Mobile Bottom Navigation -->
-    <div class="mobile-bottom-nav">
-        <a href="../index.html" class="bottom-nav-item active">
-            <i class="fas fa-home"></i>
-            <span>الرئيسية</span>
-        </a>
-        <a href="products.html" class="bottom-nav-item">
-            <i class="fas fa-th-large"></i>
-            <span>المنتجات</span>
-        </a>
-        <a href="Cart.html" class="bottom-nav-item position-relative">
-            <i class="fas fa-shopping-cart"></i>
-            <span>السلة</span>
-            <span id="mobile-cart-count" class="cart-count">0</span>
-        </a>
-        <a href="signup&signup.html" class="bottom-nav-item">
-            <i class="fas fa-user"></i>
-            <span>الحساب</span>
-        </a>
+   <!-- Mobile Bottom Navigation -->
+<div class="mobile-bottom-nav">
+    <a href="#" id="openSidebar" class="bottom-nav-item">
+        <ion-icon name="grid-outline"></ion-icon>
+    </a>
+    
+   <a href="pages/Cart.html" class="bottom-nav-item position-relative">
+    <ion-icon name="cart-outline"></ion-icon>
+    <span id="mobile-cart-count" class="mobile-cart-count">0</span>
+</a>
+
+    
+    <a href="index.html" class="bottom-nav-item active">
+        <ion-icon name="home-outline"></ion-icon>
+    </a>
+    
+    <a href="pages/wishlist.html" class="bottom-nav-item">
+        <ion-icon name="heart-outline"></ion-icon>
+    </a>
+    
+    <a href="pages/signup&signup.html" class="bottom-nav-item">
+        <ion-icon name="person-outline"></ion-icon>
+    </a>
+</div>
+
+<!-- Sidebar (RTL) -->
+<div id="sidebar" class="sidebar">
+    <div class="sidebar-content">
+        <h2 class="sidebar-title">الأقسام</h2>
+        <nav class="sidebar-links">
+            <a href="pages/products.html#honey"><i class="fas fa-jar"></i> العسل</a>
+            <a href="pages/products.html#butter"><i class="fas fa-cheese"></i> الزبدة</a>
+            <a href="pages/products.html#mozzarella"><i class="fas fa-pizza-slice"></i> الموتزاريلا</a>
+            <a href="pages/products.html#nuts"><i class="fas fa-seedling"></i> المكسرات</a>
+            <a href="pages/products.html#chicken"><i class="fas fa-drumstick-bite"></i> الفراخ</a>
+            <a href="pages/products.html#meat"><i class="fas fa-hotdog"></i> اللحوم</a>
+            <a href="pages/products.html#fish"><i class="fas fa-fish"></i> الأسماك</a>
+        </nav>
+
+        <div class="sidebar-text">
+            <h3>فروزن ماركت</h3>
+            <p>نسعى لتقديم أفضل المنتجات الطازجة والعالية الجودة لعملائنا الكرام بأسعار مناسبة وخدمة متميزة.</p>
+        </div>
+
+        <div class="sidebar-social">
+            <p>تابعنا</p>
+            <a href="https://www.facebook.com/share/1CBX1XvNHf/" class="facebook" title="فيسبوك">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://wa.me/201008064581" class="whatsapp" title="واتساب">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+        </div>
     </div>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay"></div>
     
     <main>
         <h1>عروضنا الخاصة</h1>
@@ -728,6 +199,54 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  const openBtn = document.getElementById("openSidebar");
+  const links   = document.querySelectorAll("#sidebar .sidebar-links a");
+
+  // فتح
+  openBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    sidebar.classList.add("active");
+    overlay.classList.add("active");
+  });
+
+  // غلق
+  function closeSidebar() {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
+  }
+
+  overlay.addEventListener("click", closeSidebar);
+
+  // غلق عند الضغط على أي لينك
+  links.forEach(link => {
+    link.addEventListener("click", () => {
+      closeSidebar();
+    });
+  });
+});
+</script>
+        <script>
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
+const openSidebar = document.getElementById("openSidebar");
+
+openSidebar.addEventListener("click", function(e) {
+    e.preventDefault();
+    sidebar.classList.add("active");
+    overlay.classList.add("active");
+});
+
+overlay.addEventListener("click", function() {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
+});
+</script>
      <script>
         // Cart functionality
         let cart = [];
