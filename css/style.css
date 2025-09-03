@@ -1440,7 +1440,7 @@
   visibility: visible;
 }
 
- main {
+ .offers-section {
             flex: 1;
             display: flex;
             flex-direction: column;
