@@ -1450,7 +1450,7 @@
             padding: 80px 20px 40px;
         }
         
-        h1 {
+        .styled-heading {
             color: var(--primary-blue);
             margin-bottom: 2rem;
             font-size: 2.5rem;
@@ -1458,7 +1458,7 @@
             padding-bottom: 15px;
         }
         
-        h1::after {
+        .styled-heading::after {
             content: "";
             position: absolute;
             bottom: 0;
