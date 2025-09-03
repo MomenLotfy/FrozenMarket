@@ -59,26 +59,65 @@
         </div>
     </nav>
 
-    <!-- Mobile Bottom Navigation -->
-    <div class="mobile-bottom-nav">
-        <a href="../index.html" class="bottom-nav-item active">
-            <i class="fas fa-home"></i>
-            <span>الرئيسية</span>
-        </a>
-        <a href="products.html" class="bottom-nav-item">
-            <i class="fas fa-th-large"></i>
-            <span>المنتجات</span>
-        </a>
-        <a href="Cart.html" class="bottom-nav-item position-relative">
-            <i class="fas fa-shopping-cart"></i>
-            <span>السلة</span>
-            <span id="mobile-cart-count" class="cart-count">0</span>
-        </a>
-        <a href="signup&signup.html" class="bottom-nav-item">
-            <i class="fas fa-user"></i>
-            <span>الحساب</span>
-        </a>
+      <!-- Mobile Bottom Navigation -->
+<div class="mobile-bottom-nav">
+    <a href="#" id="openSidebar" class="bottom-nav-item">
+        <ion-icon name="grid-outline"></ion-icon>
+    </a>
+    
+   <a href="pages/Cart.html" class="bottom-nav-item position-relative">
+    <ion-icon name="cart-outline"></ion-icon>
+    <span id="mobile-cart-count" class="mobile-cart-count">0</span>
+</a>
+
+    
+    <a href="index.html" class="bottom-nav-item active">
+        <ion-icon name="home-outline"></ion-icon>
+    </a>
+    
+    <a href="pages/wishlist.html" class="bottom-nav-item">
+        <ion-icon name="heart-outline"></ion-icon>
+    </a>
+    
+    <a href="pages/signup&signup.html" class="bottom-nav-item">
+        <ion-icon name="person-outline"></ion-icon>
+    </a>
+</div>
+
+<!-- Sidebar (RTL) -->
+<div id="sidebar" class="sidebar">
+    <div class="sidebar-content">
+        <h2 class="sidebar-title">الأقسام</h2>
+        <nav class="sidebar-links">
+            <a href="pages/products.html#honey"><i class="fas fa-jar"></i> العسل</a>
+            <a href="pages/products.html#butter"><i class="fas fa-cheese"></i> الزبدة</a>
+            <a href="pages/products.html#mozzarella"><i class="fas fa-pizza-slice"></i> الموتزاريلا</a>
+            <a href="pages/products.html#nuts"><i class="fas fa-seedling"></i> المكسرات</a>
+            <a href="pages/products.html#chicken"><i class="fas fa-drumstick-bite"></i> الفراخ</a>
+            <a href="pages/products.html#meat"><i class="fas fa-hotdog"></i> اللحوم</a>
+            <a href="pages/products.html#fish"><i class="fas fa-fish"></i> الأسماك</a>
+        </nav>
+
+        <div class="sidebar-text">
+            <h3>فروزن ماركت</h3>
+            <p>نسعى لتقديم أفضل المنتجات الطازجة والعالية الجودة لعملائنا الكرام بأسعار مناسبة وخدمة متميزة.</p>
+        </div>
+
+        <div class="sidebar-social">
+            <p>تابعنا</p>
+            <a href="https://www.facebook.com/share/1CBX1XvNHf/" class="facebook" title="فيسبوك">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://wa.me/201008064581" class="whatsapp" title="واتساب">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+        </div>
     </div>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay"></div>
+
 
     <div class="container">
         <!-- Page Header -->
