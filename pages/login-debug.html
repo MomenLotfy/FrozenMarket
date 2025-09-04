@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول (نسخة التشخيص) - فروزن ماركت</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+     :root {
+      --primary-blue: #183c6e;
+      --primary-yellow: #ffff00;
+      --light-gray: #f8f9fa;
+      --text-dark: #333;
+      --primary-color: #3a6cf4;
+      --secondary-color: #ff9d3c;
+      --accent-color: #ff5e7d;
+      --text-color: #2c3e50;
+      --light-bg: #f8f9fa;
+      --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+      --hover-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      --border-radius: 16px;
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body { 
+      font-family: "Tajawal", "Segoe UI", sans-serif; 
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-yellow) 100%); 
+      min-height: 100vh; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      margin: 0; 
+      padding: 15px;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+    
+    .auth-container { 
+      width: 100%; 
+      max-width: 500px; 
+      padding: 40px 30px; 
+      border-radius: var(--border-radius); 
+      background: rgba(255, 255, 255, 0.15); 
+      backdrop-filter: blur(12px); 
+      box-shadow: var(--card-shadow); 
+      color: #fff; 
+      animation: fadeIn 0.8s ease-in-out;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    @keyframes fadeIn { 
+      from {opacity: 0; transform: translateY(30px);} 
+      to {opacity: 1; transform: translateY(0);} 
+    }
+    
+    .auth-header { 
+      text-align: center; 
+      margin-bottom: 25px;
+    }
+    
+    .auth-header h3 { 
+      font-weight: 800; 
+      font-size: 1.8rem; 
+      color: #fff; 
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .auth-header p { 
+      opacity: 0.9; 
+      font-size: 0.95rem; 
+      margin-top: 10px;
+    }
+    
+    .form-control { 
+      border-radius: 12px; 
+      padding: 12px 40px 12px 12px; 
+      border: 2px solid rgba(255,255,255,0.3); 
+      background: rgba(255,255,255,0.2); 
+      color: #fff; 
+      transition: var(--transition);
+      text-align: right;
+    }
+    
+    .form-control:focus {
+      border-color: var(--primary-yellow);
+      box-shadow: 0 0 0 0.2rem rgba(255, 255, 0, 0.25);
+      background: rgba(255,255,255,0.25);
+    }
+    
+    .form-control::placeholder { 
+      color: rgba(255,255,255,0.8); 
+    }
+    
+    .input-icon { 
+      position: absolute; 
+      top: 50%; 
+      right: 12px; 
+      transform: translateY(-50%); 
+      color: var(--primary-yellow); 
+      font-size: 1rem; 
+      z-index: 5;
+    }
+    
+    .input-group { 
+      position: relative; 
+      margin-bottom: 18px; 
+    }
+    
+    .btn-primary-custom { 
+      background: var(--primary-yellow); 
+      color: var(--primary-blue); 
+      border: none; 
+      border-radius: 12px; 
+      padding: 12px; 
+      font-weight: 700; 
+      font-size: 1rem; 
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(255, 255, 0, 0.3);
+    }
+    
+    .btn-primary-custom:hover { 
+      background: #e6e600; 
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 255, 0, 0.4);
+    }
+    
+    .btn-primary-custom:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .debug-info {
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: #fff;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .debug-info h5 {
+      color: var(--primary-yellow);
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .debug-log {
+      background: #000;
+      color: #0f0;
+      padding: 10px;
+      border-radius: 5px;
+      font-family: monospace;
+      font-size: 0.8rem;
+      max-height: 150px;
+      overflow-y: auto;
+      margin-top: 10px;
+    }
+    
+    #loginMsg, #debugMsg {
+      text-align: center;
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      transition: var(--transition);
+      min-height: 20px;
+    }
+    
+    .msg-success {
+      color: var(--primary-yellow);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      background: rgba(255, 215, 0, 0.1);
+    }
+    
+    .msg-error {
+      color: #ff6b6b;
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      background: rgba(255, 107, 107, 0.1);
+    }
+
+    .msg-warning {
+      color: #ffa502;
+      border: 1px solid rgba(255, 165, 2, 0.3);
+      background: rgba(255, 165, 2, 0.1);
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--primary-blue);
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s ease-in-out infinite;
+      margin-left: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .config-status {
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+    }
+
+    .status-good { color: #2ed573; }
+    .status-bad { color: #ff4757; }
+    .status-warning { color: #ffa502; }
+
+    @media (max-width: 576px) {
+      .auth-container { 
+        padding: 25px 20px; 
+        border-radius: 15px; 
+      }
+      
+      .auth-header h3 { 
+        font-size: 1.5rem; 
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="auth-container">
+  <div class="auth-header">
+    <h3>فروزن ماركت (تشخيص)</h3>
+    <p>نسخة محسّنة للتشخيص وحل المشاكل</p>
+  </div>
+
+  <!-- Config Status -->
+  <div class="debug-info">
+    <h5><i class="fas fa-cog"></i> حالة الإعدادات:</h5>
+    <div id="configStatus" class="config-status">جاري التحقق...</div>
+  </div>
+
+  <!-- Login Form -->
+  <form id="signin-form">
+    <div class="input-group">
+      <i class="fa fa-envelope input-icon"></i>
+      <input type="email" class="form-control" id="loginEmail" placeholder="البريد الإلكتروني" required value="test@example.com">
+    </div>
+    <div class="input-group">
+      <i class="fa fa-lock input-icon"></i>
+      <input type="password" class="form-control" id="loginPassword" placeholder="كلمة المرور" required value="123456">
+    </div>
+    <button type="submit" class="btn btn-primary-custom w-100" id="loginBtn">
+      تسجيل الدخول (تجريبي)
+    </button>
+    <div id="loginMsg"></div>
+  </form>
+
+  <!-- Debug Messages -->
+  <div class="debug-info">
+    <h5><i class="fas fa-bug"></i> سجل التشخيص:</h5>
+    <div id="debugLog" class="debug-log"></div>
+  </div>
+
+  <!-- Quick Tests -->
+  <div class="debug-info">
+    <h5><i class="fas fa-flask"></i> اختبارات سريعة:</h5>
+    <button type="button" class="btn btn-sm btn-outline-light me-2" onclick="testFirebaseConnection()">
+      اختبر Firebase
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-light me-2" onclick="testAuth()">
+      اختبر Auth
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-light" onclick="clearDebugLog()">
+      مسح السجل
+    </button>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+  import { 
+    getAuth, 
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    connectAuthEmulator
+  } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+  import { 
+    getFirestore,
+    connectFirestoreEmulator
+  } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+
+  // 🔧 ضع إعدادات مشروعك هنا
+  const firebaseConfig = {
+    apiKey: "AIzaSyCFk_WlW4qHcSbsLSHeWUTfGsc5W0FSE8A",           // ⚠️ استبدل بإعداداتك
+    authDomain: "frozenmarket-5c9df.firebaseapp.com",     // ⚠️ استبدل بإعداداتك
+    projectId: "frozenmarket-5c9df",                      // ⚠️ استبدل بإعداداتك
+    storageBucket: "frozenmarket-5c9df.firebasestorage.app",  // ⚠️ استبدل بإعداداتك
+    messagingSenderId: "847658049541",                    // ⚠️ استبدل بإعداداتك
+    appId: "1:847658049541:web:6f4cd551a12d5e45b5bc6c"   // ⚠️ استبدل بإعداداتك
+  };
+
+  // متغيرات التشخيص
+  let app, auth, db;
+  let debugLog = [];
+  let configValid = false;
+
+  // دالة إضافة لوج التشخيص
+  function addDebugLog(message, type = 'info') {
+    const timestamp = new Date().toLocaleTimeString('ar-EG');
+    const logEntry = `[${timestamp}] ${type.toUpperCase()}: ${message}`;
+    debugLog.push(logEntry);
+    
+    const debugLogElement = document.getElementById('debugLog');
+    debugLogElement.innerHTML = debugLog.slice(-10).join('\n'); // آخر 10 رسائل
+    debugLogElement.scrollTop = debugLogElement.scrollHeight;
+    
+    console.log(logEntry);
+  }
+
+  // دالة عرض الرسائل
+  function showMessage(elementId, message, type = 'success') {
+    const msgElement = document.getElementById(elementId);
+    msgElement.textContent = message;
+    msgElement.className = `msg-${type}`;
+    
+    setTimeout(() => {
+      msgElement.textContent = '';
+      msgElement.className = '';
+    }, 5000);
+  }
+
+  // دالة التحقق من صحة الإعدادات
+  function validateConfig() {
+    const configStatus = document.getElementById('configStatus');
+    let statusHtml = '';
+
+    // التحقق من API Key
+    if (!firebaseConfig.apiKey || firebaseConfig.apiKey === 'YOUR_API_KEY_HERE') {
+      statusHtml += '<div class="status-bad">❌ API Key غير صحيح</div>';
+    } else {
+      statusHtml += '<div class="status-good">✅ API Key موجود</div>';
+    }
+
+    // التحقق من Auth Domain
+    if (!firebaseConfig.authDomain || firebaseConfig.authDomain.includes('your-project')) {
+      statusHtml += '<div class="status-bad">❌ Auth Domain غير صحيح</div>';
+    } else {
+      statusHtml += '<div class="status-good">✅ Auth Domain صحيح</div>';
+    }
+
+    // التحقق من Project ID
+    if (!firebaseConfig.projectId || firebaseConfig.projectId === 'your-project-id') {
+      statusHtml += '<div class="status-bad">❌ Project ID غير صحيح</div>';
+    } else {
+      statusHtml += '<div class="status-good">✅ Project ID موجود</div>';
+    }
+
+    configStatus.innerHTML = statusHtml;
+    
+    // تحديد ما إذا كانت الإعدادات صالحة
+    configValid = !statusHtml.includes('status-bad');
+    
+    if (configValid) {
+      addDebugLog('إعدادات Firebase صحيحة', 'success');
+    } else {
+      addDebugLog('إعدادات Firebase تحتاج تعديل', 'error');
+    }
+  }
+
+  // تهيئة Firebase
+  async function initializeFirebase() {
+    try {
+      addDebugLog('بدء تهيئة Firebase...');
+      
+      app = initializeApp(firebaseConfig);
+      auth = getAuth(app);
+      db = getFirestore(app);
+      
+      addDebugLog('تم تهيئة Firebase بنجاح', 'success');
+      return true;
+    } catch (error) {
+      addDebugLog(`خطأ في تهيئة Firebase: ${error.message}`, 'error');
+      showMessage('loginMsg', `خطأ في تهيئة Firebase: ${error.message}`, 'error');
+      return false;
+    }
+  }
+
+  // اختبار الاتصال بـ Firebase
+  window.testFirebaseConnection = async function() {
+    addDebugLog('اختبار اتصال Firebase...');
+    
+    try {
+      // اختبار بسيط للتأكد من عمل Firebase
+      const testResult = await fetch(`https://${firebaseConfig.projectId}-default-rtdb.firebaseio.com/.json`);
+      addDebugLog('اتصال Firebase يعمل بشكل صحيح', 'success');
+      showMessage('loginMsg', 'اتصال Firebase يعمل!', 'success');
+    } catch (error) {
+      addDebugLog(`خطأ في اتصال Firebase: ${error.message}`, 'error');
+      showMessage('loginMsg', `خطأ في الاتصال: ${error.message}`, 'error');
+    }
+  };
+
+  // اختبار Authentication
+  window.testAuth = async function() {
+    addDebugLog('اختبار Authentication...');
+    
+    if (!auth) {
+      addDebugLog('Auth غير مهيأ', 'error');
+      showMessage('loginMsg', 'Auth غير مهيأ', 'error');
+      return;
+    }
+
+    try {
+      // محاولة إنشاء مستخدم تجريبي
+      const testEmail = 'test-' + Date.now() + '@example.com';
+      const testPassword = '123456';
+      
+      addDebugLog(`محاولة إنشاء مستخدم تجريبي: ${testEmail}`);
+      
+      const userCredential = await createUserWithEmailAndPassword(auth, testEmail, testPassword);
+      addDebugLog('تم إنشاء المستخدم التجريبي بنجاح', 'success');
+      
+      // حذف المستخدم التجريبي
+      await userCredential.user.delete();
+      addDebugLog('تم حذف المستخدم التجريبي', 'info');
+      
+      showMessage('loginMsg', 'Authentication يعمل بشكل صحيح!', 'success');
+    } catch (error) {
+      addDebugLog(`خطأ في Authentication: ${error.code} - ${error.message}`, 'error');
+      
+      // تحليل نوع الخطأ
+      let userMessage = 'خطأ في Authentication: ';
+      switch (error.code) {
+        case 'auth/operation-not-allowed':
+          userMessage += 'Email/Password غير مفعّل في Firebase Console';
+          break;
+        case 'auth/invalid-api-key':
+          userMessage += 'API Key غير صحيح';
+          break;
+        case 'auth/network-request-failed':
+          userMessage += 'مشكلة في الاتصال بالإنترنت';
+          break;
+        default:
+          userMessage += error.message;
+      }
+      
+      showMessage('loginMsg', userMessage, 'error');
+    }
+  };
+
+  // مسح سجل التشخيص
+  window.clearDebugLog = function() {
+    debugLog = [];
+    document.getElementById('debugLog').innerHTML = '';
+    addDebugLog('تم مسح سجل التشخيص');
+  };
+
+  // معالج تسجيل الدخول
+  document.getElementById('signin-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const loginBtn = document.getElementById('loginBtn');
+    
+    if (!email || !password) {
+      showMessage('loginMsg', 'يرجى ملء جميع الحقول', 'error');
+      return;
+    }
+
+    if (!configValid) {
+      showMessage('loginMsg', 'إعدادات Firebase غير صحيحة', 'error');
+      return;
+    }
+    
+    loginBtn.disabled = true;
+    loginBtn.innerHTML = 'جاري تسجيل الدخول... <span class="spinner"></span>';
+    
+    addDebugLog(`محاولة تسجيل دخول: ${email}`);
+    
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      
+      addDebugLog(`تم تسجيل الدخول بنجاح: ${user.uid}`, 'success');
+      showMessage('loginMsg', 'تم تسجيل الدخول بنجاح!', 'success');
+      
+      // يمكنك إضافة إعادة التوجيه هنا
+      // window.location.href = "profile.html";
+      
+    } catch (error) {
+      addDebugLog(`خطأ في تسجيل الدخول: ${error.code} - ${error.message}`, 'error');
+      
+      let userMessage = 'خطأ في تسجيل الدخول: ';
+      switch (error.code) {
+        case 'auth/user-not-found':
+          userMessage += 'لا يوجد حساب بهذا البريد الإلكتروني';
+          break;
+        case 'auth/wrong-password':
+          userMessage += 'كلمة المرور غير صحيحة';
+          break;
+        case 'auth/invalid-email':
+          userMessage += 'البريد الإلكتروني غير صحيح';
+          break;
+        case 'auth/too-many-requests':
+          userMessage += 'محاولات كثيرة جداً، حاول مرة أخرى لاحقاً';
+          break;
+        case 'auth/network-request-failed':
+          userMessage += 'خطأ في الاتصال بالإنترنت';
+          break;
+        case 'auth/invalid-api-key':
+          userMessage += 'مفتاح API غير صحيح - تحقق من إعدادات Firebase';
+          break;
+        case 'auth/operation-not-allowed':
+          userMessage += 'Email/Password غير مفعّل في Firebase Console';
+          break;
+        default:
+          userMessage += error.message;
+      }
+      
+      showMessage('loginMsg', userMessage, 'error');
+    } finally {
+      loginBtn.disabled = false;
+      loginBtn.innerHTML = 'تسجيل الدخول (تجريبي)';
+    }
+  });
+
+  // بدء التطبيق
+  async function startApp() {
+    addDebugLog('بدء تطبيق التشخيص...');
+    
+    validateConfig();
+    
+    if (configValid) {
+      const initialized = await initializeFirebase();
+      if (initialized) {
+        addDebugLog('التطبيق جاهز للاستخدام', 'success');
+        showMessage('loginMsg', 'جاهز للاختبار - استخدم البيانات التجريبية أو بياناتك', 'success');
+      }
+    } else {
+      addDebugLog('يرجى تصحيح إعدادات Firebase أولاً', 'warning');
+      showMessage('loginMsg', 'يرجى تصحيح إعدادات Firebase', 'warning');
+    }
+  }
+
+  // بدء التطبيق عند تحميل الصفحة
+  startApp();
+
+</script>
+
+</body>
+</html>
