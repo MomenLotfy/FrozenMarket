@@ -4,116 +4,522 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>الشروط والأحكام - فروزن ماركت</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --primary-color: #183c6e;
+      --secondary-color: #183c6e;
+      --accent-color: #ffff00;
+      --dark-color: #183c6e;
+      --light-color: #f8fafc;
+      --gray-color: #64748b;
+      --success-color: #10b981;
+      --border-radius: 12px;
+      --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: "Cairo", sans-serif;
-      background-color: #f9f9f9;
+      background: linear-gradient(135deg, #f0f4ff 0%, #e6f0ff 100%);
       margin: 0;
       padding: 0;
       line-height: 1.8;
-      color: #333;
+      color: #334155;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
+
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* الهيدر */
     header {
-      background-color: #2c3e50;
-      color: #fff;
+      background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 25px 0;
       text-align: center;
-      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
     }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,218.7C672,224,768,160,864,138.7C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: center;
+    }
+
     header h1 {
       margin: 0;
-      font-size: 24px;
+      font-size: 2.2rem;
+      font-weight: 700;
+      position: relative;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
+
+    header p {
+      margin: 10px 0 0;
+      font-size: 1.1rem;
+      opacity: 0.9;
+      position: relative;
+      color: aliceblue;
+    }
+
+    /* المحتوى الرئيسي */
     main {
-      max-width: 900px;
-      margin: 20px auto;
-      background: #fff;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      flex: 1;
+      padding: 40px 0;
     }
+
+    .content-box {
+      background: var(--light-color);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .tabs {
+      display: flex;
+      background: var(--dark-color);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab {
+      padding: 16px 24px;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: var(--transition);
+      border-bottom: 3px solid transparent;
+    }
+
+    .tab:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .tab.active {
+      border-bottom: 3px solid var(--accent-color);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .tab-content {
+      padding: 30px;
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section {
+      margin-bottom: 30px;
+      padding-bottom: 25px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
     h2 {
-      color: #2c3e50;
-      margin-top: 25px;
-      font-size: 20px;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
+
+    h2 i {
+      color: var(--secondary-color);
+      font-size: 1.3rem;
+    }
+
     p {
-      margin: 10px 0;
-      font-size: 16px;
+      margin: 15px 0;
+      font-size: 1rem;
+      color: var(--gray-color);
     }
+
     ul {
-      margin: 10px 20px;
+      margin: 15px 0;
       padding: 0;
+      list-style: none;
     }
+
     li {
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      padding-right: 25px;
+      position: relative;
+      color: var(--gray-color);
     }
+
+    li::before {
+      content: '•';
+      color: var(--accent-color);
+      font-weight: bold;
+      position: absolute;
+      right: 0;
+    }
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--secondary-color);
+      text-decoration: underline;
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, rgba(37, 99, 235, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+      border-right: 4px solid var(--primary-color);
+      padding: 15px 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+
+    /* الفوتر */
     footer {
+      background: var(--dark-color);
+      color: white;
       text-align: center;
-      padding: 15px;
-      background: #2c3e50;
-      color: #fff;
-      margin-top: 30px;
+      padding: 20px;
+      margin-top: auto;
     }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .social-links a {
+      color: white;
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      color: var(--accent-color);
+      transform: translateY(-2px);
+    }
+
+    /*响应式设计*/
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .tab {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+      }
+      
+      .tab-content {
+        padding: 20px;
+      }
+      
+      h2 {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 20px 0;
+      }
+      
+      header h1 {
+        font-size: 1.5rem;
+      }
+      
+      header p {
+        font-size: 0.9rem;
+      }
+      
+      .tab {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+      }
+    }
+
+    /* تأثيرات تفاعلية */
+    .tab-content section {
+      transition: var(--transition);
+    }
+
+    .highlight {
+      transition: var(--transition);
+    }
+
+ 
   </style>
 </head>
 <body>
 
   <header>
-    <h1>الشروط والأحكام</h1>
-    <p>مرحبًا بك في فروزن ماركت</p>
+    <div class="container">
+      <h1>الشروط والأحكام</h1>
+      <p>مرحبًا بك في فروزن ماركت - نحرص على راحتك وثقتك</p>
+    </div>
   </header>
 
   <main>
-    <h2>١. قبول الشروط</h2>
-    <p>
-      باستخدامك لموقع <strong>فروزن ماركت</strong> فأنت توافق على هذه الشروط والأحكام.
-      إذا لم تكن موافقًا عليها، نرجو عدم استخدام الموقع.
-    </p>
+    <div class="container">
+      <div class="content-box">
+        <div class="tabs">
+          <div class="tab active" data-tab="terms">الشروط العامة</div>
+          <div class="tab" data-tab="privacy">الخصوصية</div>
+          <div class="tab" data-tab="payment">الدفع والتوصيل</div>
+          <div class="tab" data-tab="return">الإرجاع والاستبدال</div>
+        </div>
+        
+        <!-- محتوى الشروط العامة -->
+        <div class="tab-content active" id="terms">
+          <section class="section">
+            <h2><i class="fas fa-file-signature"></i> قبول الشروط</h2>
+            <p>
+              باستخدامك لموقع <strong>فروزن ماركت</strong> فأنت توافق على هذه الشروط والأحكام.
+              إذا لم تكن موافقًا عليها، نرجو عدم استخدام الموقع.
+            </p>
+            <div class="highlight">
+              <p>يتم حفظ حقوق التعديل والتحديث حسب سياسة الشركة وتغيرات السوق.</p>
+            </div>
+          </section>
 
-    <h2>٢. استخدام الموقع</h2>
-    <ul>
-      <li>يُستخدم الموقع فقط للأغراض القانونية المشروعة.</li>
-      <li>يُمنع استخدام الموقع لأي نشاط يسبب ضرر للموقع أو للمستخدمين الآخرين.</li>
-      <li>قد يتم تعليق أو إيقاف الحساب في حال مخالفة الشروط.</li>
-    </ul>
+          <section class="section">
+            <h2><i class="fas fa-laptop"></i> استخدام الموقع</h2>
+            <ul>
+              <li>يُستخدم الموقع فقط للأغراض القانونية المشروعة.</li>
+              <li>يُمنع استخدام الموقع لأي نشاط يسبب ضرر للموقع أو للمستخدمين الآخرين.</li>
+              <li>قد يتم تعليق أو إيقاف الحساب في حال مخالفة الشروط.</li>
+            </ul>
+          </section>
 
-    <h2>٣. المنتجات والأسعار</h2>
-    <p>
-      نحرص دائمًا على عرض منتجات دقيقة وبأسعار صحيحة، ومع ذلك قد تحدث بعض الأخطاء غير المقصودة.
-      نحتفظ بحق تعديل الأسعار أو تفاصيل المنتجات في أي وقت دون إشعار مسبق.
-    </p>
+          <section class="section">
+            <h2><i class="fas fa-tags"></i> المنتجات والأسعار</h2>
+            <p>
+              نحرص دائمًا على عرض منتجات دقيقة وبأسعار صحيحة، ومع ذلك قد تحدث بعض الأخطاء غير المقصودة.
+              نحتفظ بحق تعديل الأسعار أو تفاصيل المنتجات في أي وقت دون إشعار مسبق.
+            </p>
+          </section>
 
-    <h2>٤. الدفع والتوصيل</h2>
-    <ul>
-      <li>تتم عمليات الدفع عبر وسائل الدفع المتاحة في الموقع.</li>
-      <li>قد تختلف مدة التوصيل حسب العنوان الجغرافي والظروف.</li>
-      <li>رسوم الشحن تُوضح عند إتمام عملية الشراء.</li>
-    </ul>
+          <section class="section">
+            <h2><i class="fas fa-copyright"></i> الملكية الفكرية</h2>
+            <p>
+              جميع حقوق الملكية الفكرية الخاصة بالموقع ومحتوياته (النصوص، الصور، التصاميم، العلامات التجارية) 
+              محفوظة لـ <strong>فروزن ماركت</strong>، ولا يُسمح باستخدامها دون إذن مسبق.
+            </p>
+          </section>
 
-    <h2>٥. سياسة الإرجاع والاستبدال</h2>
-    <p>
-      يمكن استرجاع أو استبدال المنتجات خلال فترة زمنية محددة إذا كانت بحالتها الأصلية
-      ووفقًا لسياسة الإرجاع الخاصة بـ <strong>فروزن ماركت</strong>.
-    </p>
+          <section class="section">
+            <h2><i class="fas fa-edit"></i> تعديل الشروط</h2>
+            <p>
+              يحق لـ <strong>فروزن ماركت</strong> تعديل أو تحديث هذه الشروط والأحكام في أي وقت،
+              ويُعتبر استمرارك في استخدام الموقع بعد التعديلات موافقة ضمنية عليها.
+            </p>
+          </section>
+        </div>
+        
+        <!-- محتوى الخصوصية -->
+        <div class="tab-content" id="privacy">
+          <section class="section">
+            <h2><i class="fas fa-user-shield"></i> سياسة الخصوصية</h2>
+            <p>
+              نحن في <strong>فروزن ماركت</strong> نحرص على حماية خصوصية بياناتك الشخصية. 
+              تشرح هذه السياسة كيفية جمعنا واستخدامنا وحماية معلوماتك.
+            </p>
+          </section>
 
-    <h2>٦. الملكية الفكرية</h2>
-    <p>
-      جميع حقوق الملكية الفكرية الخاصة بالموقع ومحتوياته (النصوص، الصور، التصاميم، العلامات التجارية) 
-      محفوظة لـ <strong>فروزن ماركت</strong>، ولا يُسمح باستخدامها دون إذن مسبق.
-    </p>
+          <section class="section">
+            <h2><i class="fas fa-database"></i> المعلومات التي نجمعها</h2>
+            <ul>
+              <li>المعلومات الشخصية التي تزودنا بها عند إنشاء الحساب أو إتمام عملية الشراء</li>
+              <li>معلومات حول استخدامك لموقعنا وتفاعلك معه</li>
+              <li>معلومات التقنية مثل عنوان IP ونوع المتصفح وإعدادات المنطقة</li>
+            </ul>
+          </section>
 
-    <h2>٧. تعديل الشروط</h2>
-    <p>
-      يحق لـ <strong>فروزن ماركت</strong> تعديل أو تحديث هذه الشروط والأحكام في أي وقت،
-      ويُعتبر استمرارك في استخدام الموقع بعد التعديلات موافقة ضمنية عليها.
-    </p>
+          <section class="section">
+            <h2><i class="fas fa-shield-alt"></i> كيفية استخدام المعلومات</h2>
+            <p>
+              نستخدم معلوماتك لتقديم خدماتنا وتحسين تجربتك وتوصيل العروض والمنتجات المناسبة لك،
+              ولأغراض الأمان ومنع الاحتيال.
+            </p>
+          </section>
 
-    <h2>٨. التواصل معنا</h2>
-    <p>
-      إذا كان لديك أي استفسار بخصوص هذه الشروط والأحكام، يمكنك التواصل معنا عبر البريد الإلكتروني:  
-      <a href="mailto:support@frozenmarket.com">support@frozenmarket.com</a>
-    </p>
+          <section class="section">
+            <h2><i class="fas fa-lock"></i> حماية المعلومات</h2>
+            <p>
+              نستخدم تقنيات تشفير متقدمة لحماية بياناتك الشخصية ونواصل تحديد وتحسين إجراءات الأمان
+              لحماية معلوماتك من الوصول غير المصرح به.
+            </p>
+          </section>
+        </div>
+        
+        <!-- محتوى الدفع والتوصيل -->
+        <div class="tab-content" id="payment">
+          <section class="section">
+            <h2><i class="fas fa-credit-card"></i> طرق الدفع</h2>
+            <p>
+              نوفر لكم طرق دفع آمنة وسهلة لتلبية احتياجاتك المختلفة. جميع عمليات الدفع محمية بتقنيات تشفير متقدمة.
+            </p>
+            <ul>
+              <li>الدفع عند الاستلام</li>
+              <li>البطاقات الائتمانية (Visa, MasterCard) غير متاح حاليا</li>
+              <li>المحافظ الإلكترونية (فودافون كاش، orange cash) غير متاح حاليا</li>
+              
+            </ul>
+          </section>
+
+          <section class="section">
+            <h2><i class="fas fa-shipping-fast"></i> سياسة التوصيل</h2>
+            <p>
+"نوفر لك خدمة التوصيل في الوقت الذي يناسبك، حيث يمكنك اختيار وقت الاستلام أثناء عملية الشراء وفقاً للخيارات المتاحة في تطبيقنا.
+
+            </p>
+            <ul>
+              <li>التوصيل داخل المدينة: خلال 24 ساعة مع إمكانية اختيار الوقت/li>
+        
+            </ul>
+          </section>
+
+          <section class="section">
+            <h2><i class="fas fa-money-bill-wave"></i> رسوم التوصيل</h2>
+            <p>
+              تختلف رسوم التوصيل حسب قيمة الطلب والمنطقة:
+            </p>
+            <ul>
+              <li>طلبات فوق 500 جنيه: توصيل مجاني</li>
+              <li>طلبات من 200 إلى 500 جنيه: رسوم توصيل 10 جنيه</li>
+            </ul>
+          </section>
+        </div>
+        
+        <!-- محتوى الإرجاع والاستبدال -->
+        <div class="tab-content" id="return">
+          <section class="section">
+            <h2><i class="fas fa-exchange-alt"></i> سياسة الإرجاع والاستبدال</h2>
+            <p>
+              يمكنك إرجاع أو استبدال المنتجات في <strong>نفس اليوم</strong> من تاريخ الاستلام، 
+              بشرط أن تكون المنتجات في حالتها الأصلية وغير مفتوحة وبالعبوة الأصلية.
+            </p>
+          </section>
+
+          <section class="section">
+            <h2><i class="fas fa-undo"></i> شروط الإرجاع</h2>
+            <ul>
+              <li>يجب أن يكون المنتج في حالته الأصلية</li>
+              <li>يجب أن يكون المنتج غير مفتوح وبالعبوة الأصلية</li>
+              <li>يجب تقديم فاتورة الشراء الأصلية</li>
+              <li>لا ينطبق حق الإرجاع على بعض المنتجات الخاصة (المنتجات القابلة للتلف)</li>
+            </ul>
+          </section>
+
+          <section class="section">
+            <h2><i class="fas fa-sync-alt"></i> عملية الاستبدال</h2>
+            <p>
+              لاستبدال منتج، يرجى التواصل مع خدمة العملاء وسنقوم بإرسال مندوبنا لاستلام المنتج 
+              وتسليم المنتج البديل في نفس يوك الطلب
+            </p>
+          </section>
+
+          <section class="section">
+            <h2><i class="fas fa-money-bill"></i> استرداد المبلغ</h2>
+            <p>
+              في حال طلب استرداد المبلغ، سيتم تحويل المبلغ إلى وسيلة الدفع الأصلية  
+              بعد استلام المنتج والتأكد من استيفائه لشروط الإرجاع.
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
   </main>
+<!---
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <p>© 2023 فروزن ماركت. جميع الحقوق محفوظة.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-snapchat"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+-->
 
+  <script>
+    // دالة للتبديل بين التبويبات
+    function initTabs() {
+      const tabs = document.querySelectorAll('.tab');
+      const tabContents = document.querySelectorAll('.tab-content');
+      
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          // إزالة النشاط من جميع التبويبات
+          tabs.forEach(t => t.classList.remove('active'));
+          // إضافة النشاط للتبويب المختار
+          tab.classList.add('active');
+          
+          // إخفاء جميع محتويات التبويبات
+          tabContents.forEach(content => content.classList.remove('active'));
+          
+          // إظهار المحتوى المناسب للتبويب المختار
+          const tabId = tab.getAttribute('data-tab');
+          document.getElementById(tabId).classList.add('active');
+        });
+      });
+    }
+    
+    // تهيئة التبويبات عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', initTabs);
+  </script>
 </body>
 </html>
