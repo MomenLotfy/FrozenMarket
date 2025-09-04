@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>الملف الشخصي - فروزن ماركت</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script typodule" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nome src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <style>
     :root {
       --primary-blue: #183c6e;
@@ -34,6 +36,195 @@
       color: var(--text-dark);
       line-height: 1.6;
     }
+
+      /* Mobile Bottom Navigation */
+.mobile-bottom-nav {
+    display: none; /* افتراضياً مخفي */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    padding: 10px 10px;
+    display: flex; /* نخليها مرنة */
+}
+
+/* العناصر */
+.bottom-nav-item {
+    flex: 1;
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.bottom-nav-item:hover,
+.bottom-nav-item.active {
+    color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+.bottom-nav-item ion-icon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+.bottom-nav-item span {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Mobile cart badge (افتراضي) */
+.mobile-cart-count {
+    position: absolute;
+    top: -6px;
+    right: 45%;
+    background: #ffff00;
+    color: #183c6e;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
+    transition: all 0.3s ease;
+}
+
+/* للشاشات الصغيرة جداً (موبايل أقل من 480px) */
+@media (max-width: 480px) {
+  .mobile-cart-count {
+    right: 65%;   /* نقلها شوية بعيد عن الأيقونة */
+    top: -6px;    /* رفعها لفوق */
+    font-size: 0.6rem;  /* تصغير النص */
+    padding: 1px 5px;   /* تصغير البادينج */
+  }
+}
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -280px; /* يبدأ من اليمين مخفي */
+    width: 280px;
+    height: 100%;
+    background: #fff;
+    transition: right 0.3s ease;
+    z-index: 1001;
+    padding: 20px;
+    direction: rtl;
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #183c6e;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.sidebar-links a {
+    display: block;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #183c6e;
+    text-decoration: none;
+    transition: 0.2s;
+}
+.sidebar-links a i {
+    margin-left: 8px;
+}
+
+
+.sidebar-text {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    text-align: center;
+}
+.sidebar-text h3 {
+    margin-bottom: 10px;
+    color: #222;
+}
+.sidebar-text p {
+    font-size: 14px;
+    color: #555;
+}
+
+.sidebar-social {
+    margin-top: 20px;
+    text-align: center;
+}
+.sidebar-social p {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+.sidebar-social a {
+    display: inline-block;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 50%;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+}
+.sidebar-social a:hover {
+   transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+.sidebar-social a.facebook {
+            color: #0249cc;
+        }
+
+.sidebar-social a.whatsapp {
+            color: #25D366;
+        }
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 1000;
+}
+.overlay.active {
+    display: block;
+}
+
+
+
+
+/* ✅ إظهار الناف بار بس على الموبايل والتابلت */
+@media (max-width: 1024px) {
+    .mobile-bottom-nav {
+        display: flex;
+    }
+}
+
+@media (min-width: 1025px) {
+    .mobile-bottom-nav {
+        display: none;
+    }
+}
+
+
 
     .container {
       max-width: 1200px;
@@ -86,8 +277,9 @@
       transition: var(--transition);
     }
 
+    .back-btn,
     .logout-btn {
-      background: #dc3545;
+      background: #6c757d;
       color: white;
       border: none;
       padding: 10px 15px;
@@ -99,6 +291,19 @@
       display: flex;
       align-items: center;
       gap: 5px;
+      text-decoration: none;
+    }
+
+    .back-btn {
+      background: var(--primary-blue);
+    }
+
+    .back-btn:hover {
+      background: #132a4e;
+    }
+
+    .logout-btn {
+      background: #dc3545;
     }
 
     .logout-btn:hover {
@@ -195,12 +400,14 @@
       margin-bottom: 10px;
       padding-bottom: 10px;
       border-bottom: 1px dashed #eee;
+      direction: rtl;
     }
 
     .info-item:last-child {
       border-bottom: none;
       margin-bottom: 0;
       padding-bottom: 0;
+      direction: rtl;
     }
 
     .order-card {
@@ -295,6 +502,7 @@
       border-radius: 8px;
       font-size: 16px;
       transition: var(--transition);
+      direction: rtl;
     }
 
     .form-group input:focus,
@@ -303,6 +511,7 @@
       border-color: var(--primary-blue);
       box-shadow: 0 0 0 3px rgba(24, 60, 110, 0.1);
       outline: none;
+      direction: rtl;
     }
 
     .btn {
@@ -331,6 +540,10 @@
       padding: 15px;
       border-bottom: 1px solid #eee;
       transition: var(--transition);
+      background: white;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
 
     .notification-item:hover {
@@ -348,6 +561,49 @@
       justify-content: center;
       background-color: rgba(24, 60, 110, 0.1);
       border-radius: 50%;
+    }
+
+    .notification-content {
+      flex: 1;
+      margin-left: 15px;
+    }
+
+    .notification-title {
+      font-weight: bold;
+      color: var(--text-dark);
+      margin-bottom: 5px;
+    }
+
+    .notification-text {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .notification-time {
+      color: #999;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .notification-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .delete-notification {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: var(--transition);
+    }
+
+    .delete-notification:hover {
+      background: #c82333;
     }
 
     .loading {
@@ -385,6 +641,18 @@
       margin-bottom: 15px;
     }
 
+    .no-notifications {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+
+    .no-notifications i {
+      font-size: 48px;
+      color: #ddd;
+      margin-bottom: 15px;
+    }
+
     .form-check {
       display: flex;
       align-items: center;
@@ -403,6 +671,7 @@
       font-weight: normal;
     }
 
+    
     @media (max-width: 768px) {
       .profile-info,
       .settings-form {
@@ -437,14 +706,89 @@
       .tab {
         padding: 12px;
       }
+
+      .notification-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .notification-actions {
+        align-self: flex-end;
+      }
     }
   </style>
 </head>
 <body>
+    <!-- Mobile Bottom Navigation -->
+<div class="mobile-bottom-nav">
+    <a href="#" id="openSidebar" class="bottom-nav-item">
+        <ion-icon name="grid-outline"></ion-icon>
+    </a>
+    
+   <a href="Cart.html" class="bottom-nav-item position-relative">
+    <ion-icon name="cart-outline"></ion-icon>
+    <span id="mobile-cart-count" class="mobile-cart-count">0</span>
+</a>
+
+    
+    <a href="../index.html" class="bottom-nav-item active">
+        <ion-icon name="home-outline"></ion-icon>
+    </a>
+    
+    <a href="wishlist.html" class="bottom-nav-item">
+        <ion-icon name="heart-outline"></ion-icon>
+    </a>
+    
+    <a href="signup&signup.html" class="bottom-nav-item">
+        <ion-icon name="person-outline"></ion-icon>
+    </a>
+</div>
+
+
+
+<!-- Sidebar (RTL) -->
+<div id="sidebar" class="sidebar">
+    <div class="sidebar-content">
+        <h2 class="sidebar-title">الأقسام</h2>
+        <nav class="sidebar-links">
+            <a href="products.html#honey"><i class="fas fa-jar"></i> العسل</a>
+            <a href="products.html#butter"><i class="fas fa-cheese"></i> الزبدة</a>
+            <a href="products.html#mozzarella"><i class="fas fa-pizza-slice"></i> الموتزاريلا</a>
+            <a href="products.html#nuts"><i class="fas fa-seedling"></i> المكسرات</a>
+            <a href="products.html#chicken"><i class="fas fa-drumstick-bite"></i> الفراخ</a>
+            <a href="products.html#meat"><i class="fas fa-hotdog"></i> اللحوم</a>
+            <a href="products.html#fish"><i class="fas fa-fish"></i> الأسماك</a>
+        </nav>
+
+        <div class="sidebar-text">
+            <h3>فروزن ماركت</h3>
+            <p>نسعى لتقديم أفضل المنتجات الطازجة والعالية الجودة لعملائنا الكرام بأسعار مناسبة وخدمة متميزة.</p>
+        </div>
+
+        <div class="sidebar-social">
+            <p>تابعنا</p>
+            <a href="https://www.facebook.com/share/1CBX1XvNHf/" class="facebook" title="فيسبوك">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://wa.me/201008064581" class="whatsapp" title="واتساب">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+        </div>
+    </div>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay"></div>
+
+
   <header>
     <div class="nav-container">
-      <a href="index.html" class="logo">فروزن مارкет</a>
+      <a href="../index.html" class="logo">فروزن ماركت</a>
       <div class="user-header">
+        <a href="../index.html" class="back-btn">
+          <i class="fas fa-arrow-right"></i> العودة للرئيسية
+        </a>
         <button class="logout-btn" onclick="logout()">
           <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
         </button>
@@ -531,14 +875,19 @@
           <form id="deliverySettingsForm">
             <div class="form-group">
               <label for="settingsAddress">العنوان الرئيسي</label>
-              <textarea id="settingsAddress" rows="3"></textarea>
+              <input type="text" id="settingsAddress" placeholder="مثال: شارع جامع العمري أمام محل البقالة">
             </div>
             <div class="form-group">
               <label for="settingsDeliveryPref">تفضيلات أوقات التوصيل</label>
               <select id="settingsDeliveryPref">
-                <option>أي وقت</option>
-                <option>الصباح (9 ص - 12 م)</option>
-                <option>المساء (4 م - 9 م)</option>
+                <option value="any-time">أي وقت</option>
+                <option value="8-10">من 8 صباحاً إلى 10 صباحاً</option>
+                <option value="10-12">من 10 صباحاً إلى 12 ظهراً</option>
+                <option value="12-2">من 12 ظهراً إلى 2 مساءً</option>
+                <option value="2-4">من 2 مساءً إلى 4 مساءً</option>
+                <option value="4-6">من 4 مساءً إلى 6 مساءً</option>
+                <option value="6-8">من 6 مساءً إلى 8 مساءً</option>
+                <option value="8-10">من 8 مساءً إلى 10 مساءً</option>
               </select>
             </div>
             <button type="submit" class="btn"><i class="fas fa-save"></i> حفظ التغييرات</button>
@@ -549,14 +898,6 @@
         <div>
           <h3><i class="fas fa-bell"></i> إعدادات الإشعارات</h3>
           <form id="notificationSettingsForm">
-            <div class="form-check">
-              <input type="checkbox" id="notifyEmail" class="form-check-input">
-              <label for="notifyEmail" class="form-check-label">الإشعارات عبر البريد الإلكتروني</label>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" id="notifySms" class="form-check-input">
-              <label for="notifySms" class="form-check-label">الإشعارات عبر الرسائل النصية</label>
-            </div>
             <div class="form-check">
               <input type="checkbox" id="notifyPromotional" class="form-check-input">
               <label for="notifyPromotional" class="form-check-label">العروض الترويجية</label>
@@ -576,133 +917,307 @@
     <div class="tab-content" id="notifications">
       <h2><i class="fas fa-bell"></i> الإشعارات</h2>
       <div id="notificationsContainer">
-        <div class="notification-item">
-          <div class="notification-icon">
-            <i class="fas fa-info-circle"></i>
-          </div>
-          <div>
-            <div>مرحباً بك في فروزن ماركت</div>
-            <small>اليوم</small>
-          </div>
-        </div>
+        <!-- سيتم ملء الإشعارات هنا ديناميكياً -->
       </div>
     </div>
   </div>
 
+      
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  const openBtn = document.getElementById("openSidebar");
+  const links   = document.querySelectorAll("#sidebar .sidebar-links a");
+
+  // فتح
+  openBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    sidebar.classList.add("active");
+    overlay.classList.add("active");
+  });
+
+  // غلق
+  function closeSidebar() {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
+  }
+
+  overlay.addEventListener("click", closeSidebar);
+
+  // غلق عند الضغط على أي لينك
+  links.forEach(link => {
+    link.addEventListener("click", () => {
+      closeSidebar();
+    });
+  });
+});
+</script>
   <!-- Firebase SDK -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import { 
-      getAuth, 
-      onAuthStateChanged, 
-      signOut, 
-      updateProfile 
-    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
-    import { 
-      getFirestore, 
-      doc, 
-      getDoc, 
-      collection, 
-      getDocs, 
-      updateDoc, 
-      query, 
-      where, 
-      orderBy 
-    } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+   // Firebase SDK
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+import { 
+  getAuth, 
+  onAuthStateChanged, 
+  signOut, 
+  updateProfile,
+  connectAuthEmulator 
+} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+import { 
+  getFirestore, 
+  doc, 
+  getDoc, 
+  collection, 
+  getDocs, 
+  updateDoc, 
+  deleteDoc,
+  query, 
+  where, 
+  orderBy,
+  serverTimestamp,
+  connectFirestoreEmulator 
+} from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCFk_WlW4qHcSbsLSHeWUTfGsc5W0FSE8A",
-      authDomain: "frozenmarket-5c9df.firebaseapp.com",
-      projectId: "frozenmarket-5c9df",
-      storageBucket: "frozenmarket-5c9df.firebasestorage.app",
-      messagingSenderId: "847658049541",
-      appId: "1:847658049541:web:6f4cd551a12d5e45b5bc6c",
-      measurementId: "G-32ZC3B3KPT"
-    };
+// Firebase Configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCFk_WlW4qHcSbsLSHeWUTfGsc5W0FSE8A",
+  authDomain: "frozenmarket-5c9df.firebaseapp.com",
+  projectId: "frozenmarket-5c9df",
+  storageBucket: "frozenmarket-5c9df.firebasestorage.app",
+  messagingSenderId: "847658049541",
+  appId: "1:847658049541:web:6f4cd551a12d5e45b5bc6c",
+  measurementId: "G-32ZC3B3KPT"
+};
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-    let currentUser = null;
-    let userData = null;
-
-    // دالة لعرض الرسائل
-    function showMessage(elementId, message, type = 'success') {
-      const element = document.getElementById(elementId);
-      element.innerHTML = `<div class="${type === 'success' ? 'success-message' : 'error-message'}">${message}</div>`;
-      setTimeout(() => {
-        element.innerHTML = '';
-      }, 5000);
-    }
-
-    // دالة تحميل بيانات المستخدم
-    async function loadUserData(user) {
-      try {
-        const userRef = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userRef);
-
-        if (userSnap.exists()) {
-          userData = userSnap.data();
-          
-          document.getElementById("userName").textContent = userData.name || user.email;
-          document.getElementById("userSince").textContent = "عميل منذ: " + (userData.registerDate || "-");
-
-          // تحديث البيانات الشخصية
-          document.getElementById("profileName").textContent = userData.name || "-";
-          document.getElementById("profileEmail").textContent = userData.email || user.email;
-          document.getElementById("profilePhone").textContent = userData.phone || "-";
-          document.getElementById("profileRegisterDate").textContent = userData.registerDate || "-";
-
-          // العنوان
-          document.getElementById("profileAddress").textContent = userData.addresses?.primary || "-";
-
-          // الإحصائيات
-          document.getElementById("profileOrdersCount").textContent = (userData.stats?.ordersCount || 0) + " طلب";
-          document.getElementById("profileTotalSpent").textContent = (userData.stats?.totalSpent || 0) + " جنيه";
-          document.getElementById("profileLastOrder").textContent = userData.stats?.lastOrderAt || "-";
-
-          // تعبئة نماذج الإعدادات
-          document.getElementById("settingsName").value = userData.name || "";
-          document.getElementById("settingsEmail").value = userData.email || "";
-          document.getElementById("settingsPhone").value = userData.phone || "";
-          document.getElementById("settingsAddress").value = userData.addresses?.primary || "";
-          document.getElementById("settingsDeliveryPref").value = userData.preferences?.deliveryTime || "أي وقت";
-
-          // إعدادات الإشعارات
-          document.getElementById("notifyEmail").checked = userData.preferences?.notifications?.email !== false;
-          document.getElementById("notifySms").checked = userData.preferences?.notifications?.sms === true;
-          document.getElementById("notifyPromotional").checked = userData.preferences?.notifications?.promotional === true;
-          document.getElementById("notifyOrderStatus").checked = userData.preferences?.notifications?.orderStatus !== false;
-
-          if (userSnap.exists()) {
-  const data = userSnap.data();
-
-  // عرض بيانات المستخدم
-  document.querySelector(".user-header div div").textContent = data.name;
-
-  // ✅ لو أدمن أضف رابط للوحة التحكم
-  if (data.role === "admin") {
-    const adminLink = document.createElement("a");
-    adminLink.href = "AdminPanel.html";
-    adminLink.textContent = "لوحة التحكم";
-    adminLink.classList.add("admin-link"); // CSS class للتنسيق
-    document.querySelector(".user-header").appendChild(adminLink);
+// تفعيل وضع المحاكاة للاختبار
+const useEmulator = false;
+if (useEmulator && window.location.hostname === "localhost") {
+  try {
+    connectAuthEmulator(auth, "http://localhost:9099");
+    connectFirestoreEmulator(db, "localhost", 8080);
+    console.log("Firebase Emulator connected for ProfilePage");
+  } catch (error) {
+    console.error("Failed to connect to emulator:", error);
   }
 }
 
+let currentUser = null;
+let userData = null;
+let isDataLoaded = false;
+let redirectInProgress = false;
 
-        } else {
-          console.log("No user document found");
-        }
-      } catch (error) {
-        console.error("Error loading user data:", error);
+// دالة لعرض الرسائل
+function showMessage(elementId, message, type = 'success') {
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.innerHTML = `<div class="${type === 'success' ? 'success-message' : 'error-message'}">${message}</div>`;
+    setTimeout(() => {
+      element.innerHTML = '';
+    }, 5000);
+  }
+}
+
+// دالة لمعالجة الأخطاء
+function getErrorMessage(errorCode) {
+  const errorMessages = {
+    'permission-denied': 'لا يوجد صلاحية للوصول لهذه البيانات',
+    'not-found': 'البيانات المطلوبة غير موجودة',
+    'unavailable': 'الخدمة غير متاحة حالياً، حاول مرة أخرى',
+    'unauthenticated': 'يجب تسجيل الدخول أولاً',
+    'network-request-failed': 'خطأ في الاتصال بالإنترنت'
+  };
+  
+  return errorMessages[errorCode] || 'حدث خطأ غير متوقع، حاول مرة أخرى';
+}
+
+// دالة تحميل بيانات المستخدم من Firestore
+async function loadUserData(user) {
+  try {
+    console.log('Loading user data for:', user.uid);
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap.exists()) {
+      userData = userSnap.data();
+      console.log('User data loaded:', userData);
+      
+      // تحديث عرض اسم المستخدم في الهيدر
+      const userNameElement = document.getElementById("userName");
+      const userSinceElement = document.getElementById("userSince");
+      
+      if (userNameElement) {
+        userNameElement.textContent = userData.name || user.displayName || user.email;
+      }
+      
+      if (userSinceElement) {
+        userSinceElement.textContent = "عميل منذ: " + (userData.registerDate || "-");
+      }
+
+      // تحديث البيانات الشخصية
+      updateElementText("profileName", userData.name || user.displayName || "-");
+      updateElementText("profileEmail", userData.email || user.email);
+      updateElementText("profilePhone", userData.phone || "-");
+      updateElementText("profileRegisterDate", userData.registerDate || "-");
+
+      // العنوان
+      updateElementText("profileAddress", userData.addresses?.primary || "-");
+
+      // الإحصائيات
+      updateElementText("profileOrdersCount", (userData.stats?.ordersCount || 0) + " طلب");
+      updateElementText("profileTotalSpent", (userData.stats?.totalSpent || 0) + " جنيه");
+      updateElementText("profileLastOrder", userData.stats?.lastOrderAt || "-");
+
+      // تعبئة نماذج الإعدادات
+      updateInputValue("settingsName", userData.name || user.displayName || "");
+      updateInputValue("settingsEmail", userData.email || user.email);
+      updateInputValue("settingsPhone", userData.phone || "");
+      updateInputValue("settingsAddress", userData.addresses?.primary || "");
+      updateSelectValue("settingsDeliveryPref", userData.preferences?.deliveryTime || "any-time");
+
+      // إعدادات الإشعارات
+      updateCheckboxValue("notifyPromotional", userData.preferences?.notifications?.promotional === true);
+      updateCheckboxValue("notifyOrderStatus", userData.preferences?.notifications?.orderStatus !== false);
+
+      // إضافة رابط لوحة التحكم للأدمن
+      addAdminLinkIfAdmin(userData);
+
+      isDataLoaded = true;
+    } else {
+      console.log("No user document found, creating basic profile");
+      await createBasicUserProfile(user);
+    }
+  } catch (error) {
+    console.error("Error loading user data:", error);
+    showMessage('personalInfoMessage', 'حدث خطأ في تحميل البيانات: ' + getErrorMessage(error.code), 'error');
+  }
+}
+
+// دالة مساعدة لتحديث النصوص
+function updateElementText(elementId, text) {
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.textContent = text;
+  }
+}
+
+// دالة مساعدة لتحديث قيم الحقول
+function updateInputValue(elementId, value) {
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.value = value;
+  }
+}
+
+// دالة مساعدة لتحديث قيم Select
+function updateSelectValue(elementId, value) {
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.value = value;
+  }
+}
+
+// دالة مساعدة لتحديث Checkbox
+function updateCheckboxValue(elementId, checked) {
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.checked = checked;
+  }
+}
+
+// دالة إضافة رابط لوحة التحكم للأدمن
+function addAdminLinkIfAdmin(userData) {
+  const existingAdminLink = document.querySelector('.admin-link');
+  if (existingAdminLink) {
+    existingAdminLink.remove();
+  }
+
+  if (userData.role === "admin") {
+    const userHeader = document.querySelector(".user-header");
+    if (userHeader) {
+      const adminLink = document.createElement("a");
+      adminLink.href = "AdminPanel.html";
+      adminLink.textContent = "لوحة التحكم";
+      adminLink.className = "admin-link";
+      adminLink.style.cssText = `
+        background: var(--secondary-color);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: var(--transition);
+        margin-right: 10px;
+      `;
+      
+      adminLink.addEventListener('mouseover', () => {
+        adminLink.style.background = '#e6831d';
+      });
+      
+      adminLink.addEventListener('mouseout', () => {
+        adminLink.style.background = 'var(--secondary-color)';
+      });
+
+      const logoutBtn = userHeader.querySelector('.logout-btn');
+      if (logoutBtn) {
+        userHeader.insertBefore(adminLink, logoutBtn);
+      } else {
+        userHeader.appendChild(adminLink);
       }
     }
-// دالة تحميل الطلبات
-// ✅ دالة تحميل الطلبات الخاصة بالمستخدم
+  }
+}
+
+// دالة إنشاء ملف المستخدم الأساسي
+async function createBasicUserProfile(user) {
+  try {
+    const userRef = doc(db, "users", user.uid);
+    const basicProfile = {
+      uid: user.uid,
+      name: user.displayName || "مستخدم جديد",
+      email: user.email,
+      phone: "",
+      photoURL: user.photoURL || "",
+      role: "user",
+      registerDate: new Date().toLocaleDateString('ar-EG'),
+      createdAt: serverTimestamp(),
+      lastLoginAt: serverTimestamp(),
+      stats: {
+        ordersCount: 0,
+        totalSpent: 0,
+        lastOrderAt: null
+      },
+      addresses: {
+        primary: "",
+        secondary: ""
+      },
+      preferences: {
+        deliveryTime: "any-time",
+        notifications: {
+          promotional: false,
+          orderStatus: true
+        }
+      }
+    };
+
+    await updateDoc(userRef, basicProfile);
+    userData = basicProfile;
+    console.log("Basic user profile created");
+  } catch (error) {
+    console.error("Error creating basic user profile:", error);
+  }
+}
+
+// دالة تحميل الطلبات الخاصة بالمستخدم
 async function loadOrders(user) {
   try {
+    console.log('Loading orders for user:', user.uid);
+    
     const ordersRef = collection(db, "orders");
     const q = query(
       ordersRef,
@@ -712,6 +1227,11 @@ async function loadOrders(user) {
 
     const ordersSnap = await getDocs(q);
     const ordersContainer = document.getElementById("ordersContainer");
+
+    if (!ordersContainer) {
+      console.error("Orders container not found");
+      return;
+    }
 
     if (ordersSnap.empty) {
       ordersContainer.innerHTML = `
@@ -729,247 +1249,569 @@ async function loadOrders(user) {
       const order = docSnapshot.data();
       const orderId = docSnapshot.id;
 
-      const statusClass =
-        order.status === "تم التوصيل"
-          ? "status-delivered"
-          : order.status === "قيد التجهيز" || order.status === "pending"
-          ? "status-pending"
-          : "status-cancelled";
+      const statusClass = getOrderStatusClass(order.status);
+      const statusText = getOrderStatusText(order.status);
+      const orderDate = formatOrderDate(order);
 
-      const statusText = order.status || "قيد المعالجة";
-
-      // تنسيق التاريخ
-      let orderDate = "غير معروف";
-      if (order.createdAt && typeof order.createdAt.toDate === "function") {
-        const date = order.createdAt.toDate();
-        orderDate = date.toLocaleDateString("ar-EG", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        });
-      } else if (order.timestamp) {
-        const date = new Date(order.timestamp);
-        orderDate = date.toLocaleDateString("ar-EG", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        });
-      } else if (order.orderDate) {
-        orderDate = order.orderDate;
-      }
-
-      const card = document.createElement("div");
-      card.classList.add("order-card");
-      card.innerHTML = `
-        <div class="order-header">
-          <div>
-            <strong>رقم الطلب: #${order.orderNumber || orderId}</strong>
-            <div>تاريخ الطلب: ${orderDate}</div>
-          </div>
-          <div class="order-status ${statusClass}">
-            ${statusText}
-          </div>
-        </div>
-        <div class="order-details">
-          <div><strong>عنوان التوصيل:</strong><div>${order.address || "-"}</div></div>
-          <div><strong>طريقة الدفع:</strong><div>${order.paymentMethod === 'cod' ? 'الدفع عند الاستلام' : 'الدفع الإلكتروني'}</div></div>
-          <div><strong>إجمالي الطلب:</strong><div>${order.finalTotal ? order.finalTotal.toLocaleString('ar-EG') + ' ج.م' : (order.total || '0') + ' ج.م'}</div></div>
-        </div>
-        <div class="order-items">
-          <h4>المنتجات:</h4>
-          ${(order.items || [])
-            .map(
-              (item) => `
-            <div class="order-item">
-              <span>${item.name} - ${item.qty} ${item.unit || "حبة"}</span>
-              <span>${item.price ? item.price.toLocaleString('ar-EG') + ' ج.م' : '0 ج.م'}</span>
-            </div>
-          `
-            )
-            .join("")}
-        </div>
-      `;
-
-      ordersContainer.appendChild(card);
+      const orderCard = createOrderCard(order, orderId, statusClass, statusText, orderDate);
+      ordersContainer.appendChild(orderCard);
     });
+
+    console.log(`Loaded ${ordersSnap.size} orders`);
   } catch (error) {
     console.error("Error loading orders:", error);
-    document.getElementById("ordersContainer").innerHTML = `
-      <div class="no-orders">
-        <p style="color: red;">حدث خطأ في تحميل الطلبات: ${error.message}</p>
-      </div>
-    `;
+    const ordersContainer = document.getElementById("ordersContainer");
+    if (ordersContainer) {
+      ordersContainer.innerHTML = `
+        <div class="no-orders">
+          <p style="color: red;">حدث خطأ في تحميل الطلبات: ${getErrorMessage(error.code)}</p>
+        </div>
+      `;
+    }
   }
 }
 
+// دالة تحميل الإشعارات
+async function loadNotifications(user) {
+  try {
+    console.log('Loading notifications for user:', user.uid);
+    
+    const notificationsRef = collection(db, "notifications");
+    const q = query(
+      notificationsRef,
+      where("userId", "==", user.uid),
+      orderBy("createdAt", "desc")
+    );
 
-    // مراقبة حالة المستخدم
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) {
-        // إعطاء وقت قصير قبل التحويل للتأكد من عدم وجود تسجيل دخول قيد المعالجة
-        setTimeout(() => {
-          if (!auth.currentUser) {
-            window.location.href = "signup&signup.html";
-          }
-        }, 1000);
-        return;
-      }
+    const notificationsSnap = await getDocs(q);
+    const notificationsContainer = document.getElementById("notificationsContainer");
 
-      // إزالة علامة تسجيل الدخول الحديث
-      sessionStorage.removeItem('justLoggedIn');
-      
-      currentUser = user;
-      
-      // إظهار مؤشر التحميل
-      document.body.classList.add('loading');
-      
-      try {
-        await loadUserData(user);
-        await loadOrders(user);
-      } catch (error) {
-        console.error("Error loading user profile:", error);
-        showMessage('personalInfoMessage', 'حدث خطأ في تحميل البيانات', 'error');
-      } finally {
-        // إخفاء مؤشر التحميل
-        document.body.classList.remove('loading');
-      }
+    if (!notificationsContainer) {
+      console.error("Notifications container not found");
+      return;
+    }
+
+    if (notificationsSnap.empty) {
+      notificationsContainer.innerHTML = `
+        <div class="no-notifications">
+          <i class="fas fa-bell-slash"></i>
+          <p>لا توجد إشعارات حالياً</p>
+        </div>
+      `;
+      return;
+    }
+
+    notificationsContainer.innerHTML = "";
+
+    notificationsSnap.forEach((docSnapshot) => {
+      const notification = docSnapshot.data();
+      const notificationId = docSnapshot.id;
+
+      const notificationCard = createNotificationCard(notification, notificationId);
+      notificationsContainer.appendChild(notificationCard);
     });
 
-    // تسجيل الخروج
-    window.logout = async function() {
-      try {
-        await signOut(auth);
-        sessionStorage.removeItem('justLoggedIn');
-        window.location.href = "signup&signup.html?logout=true";
-      } catch (error) {
-        console.error("Logout error:", error);
-        alert("حدث خطأ أثناء تسجيل الخروج");
-      }
+    console.log(`Loaded ${notificationsSnap.size} notifications`);
+  } catch (error) {
+    console.error("Error loading notifications:", error);
+    const notificationsContainer = document.getElementById("notificationsContainer");
+    if (notificationsContainer) {
+      notificationsContainer.innerHTML = `
+        <div class="no-notifications">
+          <p style="color: red;">حدث خطأ في تحميل الإشعارات: ${getErrorMessage(error.code)}</p>
+        </div>
+      `;
+    }
+  }
+}
+
+// دالة إنشاء كارد الإشعار
+function createNotificationCard(notification, notificationId) {
+  const card = document.createElement("div");
+  card.classList.add("notification-item");
+  
+  const notificationDate = formatNotificationDate(notification);
+  const iconClass = getNotificationIcon(notification.type);
+
+  card.innerHTML = `
+    <div class="notification-icon">
+      <i class="${iconClass}"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">${notification.title || 'إشعار'}</div>
+      <div class="notification-text">${notification.message || notification.text || ''}</div>
+      <div class="notification-time">${notificationDate}</div>
+    </div>
+    <div class="notification-actions">
+      <button class="delete-notification" onclick="deleteNotification('${notificationId}')">
+        <i class="fas fa-trash"></i> حذف
+      </button>
+    </div>
+  `;
+
+  return card;
+}
+
+// دالة حذف الإشعار
+window.deleteNotification = async function(notificationId) {
+  if (!confirm('هل تريد حذف هذا الإشعار؟')) {
+    return;
+  }
+
+  try {
+    await deleteDoc(doc(db, "notifications", notificationId));
+    
+    // إزالة الإشعار من الواجهة
+    const notificationElement = document.querySelector(`[onclick="deleteNotification('${notificationId}')"]`).closest('.notification-item');
+    if (notificationElement) {
+      notificationElement.remove();
+    }
+
+    // التحقق إذا لم تعد هناك إشعارات
+    const remainingNotifications = document.querySelectorAll('.notification-item');
+    if (remainingNotifications.length === 0) {
+      const notificationsContainer = document.getElementById("notificationsContainer");
+      notificationsContainer.innerHTML = `
+        <div class="no-notifications">
+          <i class="fas fa-bell-slash"></i>
+          <p>لا توجد إشعارات حالياً</p>
+        </div>
+      `;
+    }
+
+    console.log('Notification deleted successfully');
+  } catch (error) {
+    console.error('Error deleting notification:', error);
+    alert('حدث خطأ أثناء حذف الإشعار: ' + getErrorMessage(error.code));
+  }
+};
+
+// دالة تحديد أيقونة الإشعار
+function getNotificationIcon(type) {
+  switch (type) {
+    case 'order':
+      return 'fas fa-shopping-bag';
+    case 'promotion':
+      return 'fas fa-tag';
+    case 'system':
+      return 'fas fa-info-circle';
+    case 'warning':
+      return 'fas fa-exclamation-triangle';
+    default:
+      return 'fas fa-bell';
+  }
+}
+
+// دالة تنسيق تاريخ الإشعار
+function formatNotificationDate(notification) {
+  try {
+    let date;
+    if (notification.createdAt && typeof notification.createdAt.toDate === "function") {
+      date = notification.createdAt.toDate();
+    } else if (notification.timestamp) {
+      date = new Date(notification.timestamp);
+    } else if (notification.createdAt) {
+      date = new Date(notification.createdAt);
+    } else {
+      return "غير معروف";
+    }
+    
+    const now = new Date();
+    const diffTime = Math.abs(now - date);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays === 1) {
+      return "اليوم";
+    } else if (diffDays === 2) {
+      return "أمس";
+    } else if (diffDays <= 7) {
+      return `منذ ${diffDays - 1} أيام`;
+    } else {
+      return date.toLocaleDateString("ar-EG", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+    }
+  } catch (error) {
+    console.error("Error formatting notification date:", error);
+    return "غير معروف";
+  }
+}
+
+// باقي الدوال المساعدة للطلبات
+function getOrderStatusClass(status) {
+  if (status === "تم التوصيل" || status === "delivered") {
+    return "status-delivered";
+  } else if (status === "قيد التجهيز" || status === "pending" || status === "processing") {
+    return "status-pending";
+  } else {
+    return "status-cancelled";
+  }
+}
+
+function getOrderStatusText(status) {
+  const statusMapping = {
+    "delivered": "تم التوصيل",
+    "pending": "قيد التجهيز",
+    "processing": "قيد المعالجة",
+    "cancelled": "ملغي",
+    "shipped": "تم الشحن"
+  };
+  
+  return statusMapping[status] || status || "قيد المعالجة";
+}
+
+function formatOrderDate(order) {
+  let orderDate = "غير معروف";
+  
+  try {
+    if (order.createdAt && typeof order.createdAt.toDate === "function") {
+      const date = order.createdAt.toDate();
+      orderDate = date.toLocaleDateString("ar-EG", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    } else if (order.timestamp) {
+      const date = new Date(order.timestamp);
+      orderDate = date.toLocaleDateString("ar-EG", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    } else if (order.orderDate) {
+      orderDate = order.orderDate;
+    }
+  } catch (error) {
+    console.error("Error formatting date:", error);
+  }
+  
+  return orderDate;
+}
+
+function createOrderCard(order, orderId, statusClass, statusText, orderDate) {
+  const card = document.createElement("div");
+  card.classList.add("order-card");
+  
+  let totalAmount = "0 ج.م";
+  if (order.finalTotal && typeof order.finalTotal === 'number') {
+    totalAmount = order.finalTotal.toLocaleString('ar-EG') + ' ج.م';
+  } else if (order.total) {
+    totalAmount = order.total + ' ج.م';
+  }
+
+  const paymentMethodText = order.paymentMethod === 'cod' ? 'الدفع عند الاستلام' : 'الدفع الإلكتروني';
+
+  card.innerHTML = `
+    <div class="order-header">
+      <div>
+        <strong>رقم الطلب: #${order.orderNumber || orderId.substring(0, 8)}</strong>
+        <div>تاريخ الطلب: ${orderDate}</div>
+      </div>
+      <div class="order-status ${statusClass}">
+        ${statusText}
+      </div>
+    </div>
+    <div class="order-details">
+      <div><strong>عنوان التوصيل:</strong><div>${order.address || order.deliveryAddress || "-"}</div></div>
+      <div><strong>طريقة الدفع:</strong><div>${paymentMethodText}</div></div>
+      <div><strong>إجمالي الطلب:</strong><div>${totalAmount}</div></div>
+      <div><strong>رسوم التوصيل:</strong><div>${order.deliveryFee || 0} ج.م</div></div>
+    </div>
+    <div class="order-items">
+      <h4>المنتجات:</h4>
+      ${formatOrderItems(order.items || [])}
+    </div>
+  `;
+
+  return card;
+}
+
+function formatOrderItems(items) {
+  if (!items || items.length === 0) {
+    return '<div class="order-item"><span>لا توجد تفاصيل للمنتجات</span></div>';
+  }
+
+  return items.map(item => {
+    const itemPrice = item.price ? item.price.toLocaleString('ar-EG') + ' ج.م' : '0 ج.م';
+    const itemQty = item.qty || item.quantity || 1;
+    const itemUnit = item.unit || "حبة";
+    const itemName = item.name || item.title || "منتج غير محدد";
+
+    return `
+      <div class="order-item">
+        <span>${itemName} - ${itemQty} ${itemUnit}</span>
+        <span>${itemPrice}</span>
+      </div>
+    `;
+  }).join("");
+}
+
+// مراقبة حالة المستخدم
+onAuthStateChanged(auth, async (user) => {
+  console.log('Auth state changed:', user ? 'User logged in' : 'User logged out');
+  
+  if (!user) {
+    if (!redirectInProgress && window.location.pathname !== '/signup&signup.html') {
+      redirectInProgress = true;
+      console.log('User not authenticated, redirecting to login...');
+      
+      setTimeout(() => {
+        if (!auth.currentUser) {
+          sessionStorage.setItem('redirectFrom', 'profile');
+          window.location.href = "signup&signup.html";
+        }
+      }, 1000);
+    }
+    return;
+  }
+
+  currentUser = user;
+  console.log('Current user:', currentUser.email);
+
+  const justLoggedIn = sessionStorage.getItem('justLoggedIn');
+  if (justLoggedIn) {
+    sessionStorage.removeItem('justLoggedIn');
+    console.log('Welcome back message could be shown here');
+  }
+
+  document.body.classList.add('loading');
+
+  try {
+    await Promise.all([
+      loadUserData(user),
+      loadOrders(user),
+      loadNotifications(user)
+    ]);
+    
+    console.log('Profile data loaded successfully');
+  } catch (error) {
+    console.error("Error loading profile data:", error);
+    showMessage('personalInfoMessage', 'حدث خطأ في تحميل البيانات: ' + getErrorMessage(error.code), 'error');
+  } finally {
+    document.body.classList.remove('loading');
+    redirectInProgress = false;
+  }
+});
+
+// تسجيل الخروج
+window.logout = async function() {
+  if (redirectInProgress) return;
+  
+  try {
+    redirectInProgress = true;
+    console.log('Logging out user...');
+    
+    currentUser = null;
+    userData = null;
+    isDataLoaded = false;
+    sessionStorage.clear();
+    
+    await signOut(auth);
+    
+    console.log('User logged out successfully');
+    window.location.href = "signup&signup.html?logout=true";
+  } catch (error) {
+    console.error("Logout error:", error);
+    alert("حدث خطأ أثناء تسجيل الخروج: " + getErrorMessage(error.code));
+    redirectInProgress = false;
+  }
+};
+
+// حفظ المعلومات الشخصية
+document.getElementById("personalInfoForm")?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  
+  if (!currentUser || !isDataLoaded) {
+    showMessage('personalInfoMessage', 'يرجى انتظار تحميل البيانات', 'error');
+    return;
+  }
+
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  const originalText = submitBtn.innerHTML;
+  
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحفظ...';
+  submitBtn.disabled = true;
+  
+  try {
+    const name = document.getElementById("settingsName").value.trim();
+    const email = document.getElementById("settingsEmail").value.trim();
+    const phone = document.getElementById("settingsPhone").value.trim();
+
+    if (!name || name.length < 2) {
+      throw new Error('يرجى إدخال اسم صحيح (حرفين على الأقل)');
+    }
+
+    if (!email || !email.includes('@')) {
+      throw new Error('يرجى إدخال بريد إلكتروني صحيح');
+    }
+
+    await updateProfile(currentUser, {
+      displayName: name
+    });
+
+    const userRef = doc(db, "users", currentUser.uid);
+    const updateData = {
+      name: name,
+      email: email,
+      phone: phone,
+      lastUpdatedAt: serverTimestamp()
     };
 
-    // حفظ المعلومات الشخصية
-    document.getElementById("personalInfoForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
+    await updateDoc(userRef, updateData);
+
+    if (userData) {
+      userData.name = name;
+      userData.email = email;
+      userData.phone = phone;
+    }
+
+    updateElementText("userName", name);
+    updateElementText("profileName", name);
+    updateElementText("profileEmail", email);
+    updateElementText("profilePhone", phone);
+
+    showMessage('personalInfoMessage', 'تم حفظ التغييرات بنجاح', 'success');
+    console.log('Personal info updated successfully');
+  } catch (error) {
+    console.error("Error updating personal info:", error);
+    showMessage('personalInfoMessage', error.message || 'حدث خطأ أثناء حفظ التغييرات', 'error');
+  } finally {
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
+  }
+});
+
+// حفظ إعدادات التوصيل
+document.getElementById("deliverySettingsForm")?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  
+  if (!currentUser || !isDataLoaded) {
+    showMessage('deliverySettingsMessage', 'يرجى انتظار تحميل البيانات', 'error');
+    return;
+  }
+
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  const originalText = submitBtn.innerHTML;
+  
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحفظ...';
+  submitBtn.disabled = true;
+
+  try {
+    const address = document.getElementById("settingsAddress").value.trim();
+    const deliveryPref = document.getElementById("settingsDeliveryPref").value;
+
+    const userRef = doc(db, "users", currentUser.uid);
+    const updateData = {
+      addresses: {
+        primary: address,
+        secondary: userData?.addresses?.secondary || ""
+      },
+      preferences: {
+        ...userData?.preferences,
+        deliveryTime: deliveryPref
+      },
+      lastUpdatedAt: serverTimestamp()
+    };
+
+    await updateDoc(userRef, updateData);
+
+    if (userData) {
+      userData.addresses = updateData.addresses;
+      userData.preferences = updateData.preferences;
+    }
+
+    updateElementText("profileAddress", address || "-");
+
+    showMessage('deliverySettingsMessage', 'تم حفظ إعدادات التوصيل بنجاح', 'success');
+    console.log('Delivery settings updated successfully');
+  } catch (error) {
+    console.error("Error updating delivery settings:", error);
+    showMessage('deliverySettingsMessage', 'حدث خطأ أثناء حفظ الإعدادات: ' + getErrorMessage(error.code), 'error');
+  } finally {
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
+  }
+});
+
+// حفظ إعدادات الإشعارات
+document.getElementById("notificationSettingsForm")?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  
+  if (!currentUser || !isDataLoaded) {
+    showMessage('notificationSettingsMessage', 'يرجى انتظار تحميل البيانات', 'error');
+    return;
+  }
+
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  const originalText = submitBtn.innerHTML;
+  
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحفظ...';
+  submitBtn.disabled = true;
+
+  try {
+    const notifications = {
+      promotional: document.getElementById("notifyPromotional").checked,
+      orderStatus: document.getElementById("notifyOrderStatus").checked
+    };
+
+    const userRef = doc(db, "users", currentUser.uid);
+    const updateData = {
+      preferences: {
+        ...userData?.preferences,
+        notifications: notifications
+      },
+      lastUpdatedAt: serverTimestamp()
+    };
+
+    await updateDoc(userRef, updateData);
+
+    if (userData) {
+      userData.preferences = updateData.preferences;
+    }
+
+    showMessage('notificationSettingsMessage', 'تم حفظ إعدادات الإشعارات بنجاح', 'success');
+    console.log('Notification settings updated successfully');
+  } catch (error) {
+    console.error("Error updating notification settings:", error);
+    showMessage('notificationSettingsMessage', 'حدث خطأ أثناء حفظ الإعدادات: ' + getErrorMessage(error.code), 'error');
+  } finally {
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
+  }
+});
+
+// التنقل بين التابات
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('ProfilePage DOM loaded');
+  
+  const tabs = document.querySelectorAll('.tab');
+  const tabContents = document.querySelectorAll('.tab-content');
+  
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetTab = tab.getAttribute('data-tab');
       
-      const name = document.getElementById("settingsName").value.trim();
-      const email = document.getElementById("settingsEmail").value.trim();
-      const phone = document.getElementById("settingsPhone").value.trim();
-
-      if (!name || !email) {
-        showMessage('personalInfoMessage', 'يرجى ملء جميع الحقول المطلوبة', 'error');
-        return;
-      }
-
-      try {
-        // تحديث الملف الشخصي في Auth
-        await updateProfile(currentUser, {
-          displayName: name
-        });
-
-        // تحديث البيانات في Firestore
-        const userRef = doc(db, "users", currentUser.uid);
-        await updateDoc(userRef, {
-          name: name,
-          email: email,
-          phone: phone
-        });
-
-        userData.name = name;
-        userData.email = email;
-        userData.phone = phone;
-
-        // تحديث العرض
-        document.getElementById("userName").textContent = name;
-        document.getElementById("profileName").textContent = name;
-        document.getElementById("profileEmail").textContent = email;
-        document.getElementById("profilePhone").textContent = phone;
-
-        showMessage('personalInfoMessage', 'تم حفظ التغييرات بنجاح', 'success');
-      } catch (error) {
-        console.error("Error updating personal info:", error);
-        showMessage('personalInfoMessage', 'حدث خطأ أثناء حفظ التغييرات', 'error');
-      }
-    });
-
-    // حفظ إعدادات التوصيل
-    document.getElementById("deliverySettingsForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
+      tabs.forEach(t => t.classList.remove('active'));
+      tabContents.forEach(tc => tc.classList.remove('active'));
       
-      const address = document.getElementById("settingsAddress").value.trim();
-      const deliveryPref = document.getElementById("settingsDeliveryPref").value;
-
-      try {
-        const userRef = doc(db, "users", currentUser.uid);
-        await updateDoc(userRef, {
-          addresses: {
-            primary: address
-          },
-          preferences: {
-            ...userData.preferences,
-            deliveryTime: deliveryPref
-          }
-        });
-
-        // تحديث البيانات المحلية
-        userData.addresses = { primary: address };
-        userData.preferences = { ...userData.preferences, deliveryTime: deliveryPref };
-
-        // تحديث العرض
-        document.getElementById("profileAddress").textContent = address || "-";
-
-        showMessage('deliverySettingsMessage', 'تم حفظ إعدادات التوصيل بنجاح', 'success');
-      } catch (error) {
-        console.error("Error updating delivery settings:", error);
-        showMessage('deliverySettingsMessage', 'حدث خطأ أثناء حفظ الإعدادات', 'error');
+      tab.classList.add('active');
+      const targetContent = document.getElementById(targetTab);
+      if (targetContent) {
+        targetContent.classList.add('active');
       }
-    });
-
-    // حفظ إعدادات الإشعارات
-    document.getElementById("notificationSettingsForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
       
-      const notifications = {
-        email: document.getElementById("notifyEmail").checked,
-        sms: document.getElementById("notifySms").checked,
-        promotional: document.getElementById("notifyPromotional").checked,
-        orderStatus: document.getElementById("notifyOrderStatus").checked
-      };
-
-      try {
-        const userRef = doc(db, "users", currentUser.uid);
-        await updateDoc(userRef, {
-          preferences: {
-            ...userData.preferences,
-            notifications: notifications
-          }
-        });
-
-        userData.preferences = { ...userData.preferences, notifications: notifications };
-
-        showMessage('notificationSettingsMessage', 'تم حفظ إعدادات الإشعارات بنجاح', 'success');
-      } catch (error) {
-        console.error("Error updating notification settings:", error);
-        showMessage('notificationSettingsMessage', 'حدث خطأ أثناء حفظ الإعدادات', 'error');
-      }
+      console.log('Tab switched to:', targetTab);
     });
-  </script>
+  });
+});
 
-  <script>
-    // التنقل بين التابات
-    document.addEventListener('DOMContentLoaded', function() {
-      const tabs = document.querySelectorAll('.tab');
-      const tabContents = document.querySelectorAll('.tab-content');
-      
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          const targetTab = tab.getAttribute('data-tab');
-          tabs.forEach(t => t.classList.remove('active'));
-          tabContents.forEach(tc => tc.classList.remove('active'));
-          tab.classList.add('active');
-          document.getElementById(targetTab).classList.add('active');
-        });
-      });
-    });
-  </script>
+console.log('ProfilePage script loaded successfully ✅');
+</script>
 </body>
 </html>
