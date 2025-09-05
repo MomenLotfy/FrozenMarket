@@ -7,7 +7,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/newstyle.css" rel="stylesheet">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
@@ -115,55 +115,65 @@
 <!-- Overlay -->
 <div id="overlay" class="overlay"></div>
 
-   
 <!-- Hero Section -->
 <section class="hero-section">
+
+  <!-- Desktop / Large Screens Hero -->
+  <div class="desktop-hero">
     <div class="hero-slider">
-        <!-- Slide 1 -->
-        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');">
-        </div>
-        
-        <!-- Slide 2 -->
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');">
-        </div>
-        
-        <!-- Slide 3 -->
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1506617564039-2f9247cc8817?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');">
-        </div>
-        
-        <!-- Slide 4 -->
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');">
-        </div>
-        
-        <!-- Slide 5 -->
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1563379091339-03246963d80c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');">
-        </div>
+      <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=2000&q=80');"></div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=2000&q=80');"></div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1506617564039-2f9247cc8817?auto=format&fit=crop&w=2000&q=80');"></div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=2000&q=80');"></div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1563379091339-03246963d80c?auto=format&fit=crop&w=2000&q=80');"></div>
     </div>
-    
-    <!-- Loading Indicator -->
-    <div class="slide-loading"></div>
-    
-    <!-- Hero Content -->
+
     <div class="hero-content">
-        <h1>مرحباً بكم في فروزن ماركت</h1>
-        <p>نقدم لكم أفضل المنتجات المجمدة والطازجة بأسعار منافسة وجودة عالية. اكتشفوا مجموعتنا المتنوعة من الخضروات والفواكه المجمدة واللحوم والأسماك الطازجة</p>
-        
-        <div class="hero-buttons">
-            <a class="btn-hero" href="pages/products.html">
-                <i class="fas fa-shopping-cart"></i>
-                تسوق الآن
-            </a>
-        </div>
+      <h1>مرحباً بكم في فروزن ماركت</h1>
+      <p>نقدم لكم أفضل المنتجات المجمدة والطازجة بأسعار منافسة وجودة عالية.</p>
+      <div class="hero-buttons">
+        <a class="btn-hero" href="pages/products.html">
+          <i class="fas fa-shopping-cart"></i> تسوق الآن
+        </a>
+      </div>
     </div>
-    
-    <!-- Navigation Dots -->
+
     <div class="hero-nav">
-        <div class="nav-dot active" data-slide="0"></div>
-        <div class="nav-dot" data-slide="1"></div>
-        <div class="nav-dot" data-slide="2"></div>
-        <div class="nav-dot" data-slide="3"></div>
-        <div class="nav-dot" data-slide="4"></div>
+      <div class="nav-dot active" data-slide="0"></div>
+      <div class="nav-dot" data-slide="1"></div>
+      <div class="nav-dot" data-slide="2"></div>
+      <div class="nav-dot" data-slide="3"></div>
+      <div class="nav-dot" data-slide="4"></div>
     </div>
+  </div>
+
+
+
+  <!-- Mobile / Tablet Cards -->
+  <div class="mobile-cards">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80" alt="منتج 1">
+      <h3>خضروات مجمدة</h3>
+      <p>أفضل أنواع الخضروات الطازجة والمجمدة.</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=800&q=80" alt="منتج 2">
+      <h3>فواكه مجمدة</h3>
+      <p>مجموعة متنوعة من الفواكه اللذيذة.</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1506617564039-2f9247cc8817?auto=format&fit=crop&w=800&q=80" alt="منتج 3">
+      <h3>لحوم وأسماك</h3>
+      <p>لحوم وأسماك طازجة بجودة عالية.</p>
+    </div>
+     <div class="card">
+      <img src="https://images.unsplash.com/photo-1506617564039-2f9247cc8817?auto=format&fit=crop&w=800&q=80" alt="منتج 3">
+      <h3>لحوم وأسماك</h3>
+      <p>لحوم وأسماك طازجة بجودة عالية.</p>
+    </div>
+  </div>
+
+ 
 </section>
 
     <!-- Features Section -->
@@ -203,6 +213,7 @@
                 </div>
             </div>
         </div>
+
     </section>
 
     <!-- Products Section -->
@@ -454,6 +465,25 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1.2,
+    spaceBetween: 15,
+    centeredSlides: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    breakpoints: {
+      576: {
+        slidesPerView: 2.2, // في التابلت يعرض كارتين جنب بعض
+      },
+    }
+  });
+</script>
+
 
     
 <script>
